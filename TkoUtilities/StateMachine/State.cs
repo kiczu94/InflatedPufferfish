@@ -1,12 +1,10 @@
-using Godot;
-using System.Collections.Generic;
+namespace TkoUtilities.Hsm;
 
-namespace InflatedPufferfish.Scripts.StateMachine;
-
-internal partial class State
+public class State
 {
     public readonly StateMachine StateMachine;
     public readonly State Parent;
+    public string Name;
     public State ActiveChild;
 
     public State(StateMachine stateMachine, State parent = null)
@@ -33,6 +31,10 @@ internal partial class State
         if (initialState != null)
         {
             initialState.Enter();
+        }
+        if (initialState == null)
+        {
+            StateMachine.CurrentState = Name;
         }
     }
 

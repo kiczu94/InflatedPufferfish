@@ -1,7 +1,4 @@
-using System;
-using System.Threading.Tasks;
-
-namespace Pong_1.Scripts.EventBus;
+namespace TkoUtilities.EventBus;
 
 public interface IEventBinding<T>
 {

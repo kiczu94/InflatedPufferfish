@@ -1,15 +1,14 @@
 using Godot;
+using InflatedPufferfish.Constants;
 using InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
-using InflatedPufferfish.Scripts.StateMachine;
-using System.Linq;
-
+using TkoUtilities.Hsm;
 namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine;
 
 internal partial class PlayerStateDriver : Node
 {
     [Export]
     public CharacterBody2D player;
-    
+
     public StateMachine stateMachine;
 
     public PlayerContext ctx = new PlayerContext();
@@ -19,41 +18,60 @@ internal partial class PlayerStateDriver : Node
 
     public override void _Ready()
     {
-        base._Ready();
         root = new PlayerRoot(null, ctx);
-        var builder = new StateMachineBuilder(root);
-        stateMachine = builder.Build();
+        stateMachine = new StateMachineBuilder(root).Build();
+        ctx.player = player;
+        base._Ready();
     }
 
     public override void _Process(double deltaTime)
     {
-        ctx.MovingUp = false;
-        if (Input.IsAnythingPressed()) 
-        {
-            ctx.MovingUp = true;
-        }
-
+        ResetContextButtonsData();
+        ProcessUserControls();
         stateMachine.Tick(deltaTime);
+        UpdateLastPath();
+        base._Process(deltaTime);
+    }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+    }
+
+    private static string StatePath(State s) => string.Join(" > ", s.PathToRoot().Reverse().Select(x => x.GetType().Name));
+
+    private void ResetContextButtonsData()
+    {
+        ctx.KeyToFastDeflateJustPressed = false;
+        ctx.KeyToInflateIsPressed = false;
+        ctx.KeyToBlockJustPressed = false;
+    }
+
+    private void UpdateLastPath()
+    {
         var path = StatePath(stateMachine.Root.Leaf());
-        if(path != lastPath)
+        if (path != lastPath)
         {
             GD.Print($"State {path}");
             lastPath = path;
         }
-        base._Process(deltaTime);
     }
 
-    void FixedUpdate()
+    private void ProcessUserControls()
     {
-        
+        if (Input.IsActionPressed(Actions.Inflating))
+        {
+            ctx.KeyToInflateIsPressed = true;
+        }
+
+        if (Input.IsActionJustPressed(Actions.FastDeflate))
+        {
+            ctx.KeyToFastDeflateJustPressed = true;
+        }
+
+        if (Input.IsActionJustPressed(Actions.Block))
+        {
+            ctx.KeyToBlockJustPressed = true;
+        }
     }
-
-    static string StatePath(State s) => string.Join(" > ", s.PathToRoot().Reverse().Select(x => x.GetType().Name));
-}
-
-public class PlayerContext
-{
-    public bool MovingUp;
-    public CharacterBody2D player;
 }

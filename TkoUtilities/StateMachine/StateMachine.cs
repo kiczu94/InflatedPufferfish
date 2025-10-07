@@ -1,10 +1,8 @@
-using Godot;
-using System.Collections.Generic;
+namespace TkoUtilities.Hsm;
 
-namespace InflatedPufferfish.Scripts.StateMachine;
-
-internal partial class StateMachine : Node
+public class StateMachine
 {
+    public string CurrentState;
     public readonly State Root;
     public readonly TransitionSequencer Sequencer;
     bool started;
@@ -33,7 +31,7 @@ internal partial class StateMachine : Node
         {
             Start();
         }
-        InternalTick(deltaTime);
+        Sequencer.Tick(deltaTime);
     }
 
     internal void InternalTick(double deltaTime) => Root.Update(deltaTime);

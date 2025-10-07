@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
-namespace Pong_1.Scripts.EventBus;
+namespace TkoUtilities.EventBus;
 
 [GlobalClass]
 public partial class EventBusLoader : Node

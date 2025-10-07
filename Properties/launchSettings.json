@@ -1,0 +1,21 @@
+{
+  "profiles": {
+    "InflatedPufferfish": {
+      "commandName": "Project"
+    },
+    "DebugGodot": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\tkocz\\Desktop\\Godot\\Godot_v4.4.1-stable_mono_win64\\Godot_v4.4.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path .\r\n--verbose\r\n--force-console",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    },
+    "ConsoleGodot": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\tkocz\\Desktop\\Godot\\Godot_v4.4.1-stable_mono_win64\\Godot_v4.4.1-stable_mono_win64_console.exe",
+      "commandLineArgs": "--path .\r\n--verbose\r\n--force-console",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}

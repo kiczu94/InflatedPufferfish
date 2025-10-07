@@ -1,21 +1,21 @@
-using InflatedPufferfish.Scripts.StateMachine;
+using TkoUtilities.Hsm;
 
 namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
 
 internal partial class PlayerRoot : State
 {
-    public readonly Deflated Deflated;
-    public readonly Inflating Inflating;
+    public readonly Idle Idle;
+    public readonly Blocking Blocking;
 
     readonly PlayerContext context;
 
     public PlayerRoot(StateMachine stateMachine, PlayerContext playerContext) : base(stateMachine, null)
     {
         this.context = playerContext;
-        Deflated = new Deflated(stateMachine, this, context);
-        Inflating = new Inflating(stateMachine, this, context);
+        Idle = new Idle(stateMachine, this, context);
+        Blocking = new Blocking(stateMachine, this, context);
     }
 
-    protected override State GetInitialState() => Deflated;
-    protected override State GetTransition() => context.MovingUp ? Inflating : null;
+    protected override State GetInitialState() => Idle;
+    protected override State GetTransition() => context.KeyToBlockJustPressed ? Blocking : null;
 }

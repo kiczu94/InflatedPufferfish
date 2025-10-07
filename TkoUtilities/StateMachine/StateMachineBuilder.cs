@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Reflection;
 
-namespace InflatedPufferfish.Scripts.StateMachine;
+namespace TkoUtilities.Hsm;
 
-internal class StateMachineBuilder
+public class StateMachineBuilder
 {
     readonly State root;
 

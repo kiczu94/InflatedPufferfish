@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "InflatedPufferfish.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

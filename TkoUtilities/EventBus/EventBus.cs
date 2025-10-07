@@ -1,7 +1,6 @@
 using Godot;
-using System.Collections.Generic;
 
-namespace Pong_1.Scripts.EventBus;
+namespace TkoUtilities.EventBus;
 
 public class EventBus<T> where T : IEvent
 {

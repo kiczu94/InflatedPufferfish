@@ -1,10 +1,12 @@
 using Godot;
 
+namespace TkoUtilities.SceneManager;
+
 public partial class SceneManager : Node
 {
     public static void ChangeScene(string scenePath)
     {
-        var sceneTree = Engine.GetMainLoop() as SceneTree; 
+        var sceneTree = Engine.GetMainLoop() as SceneTree;
         sceneTree.ChangeSceneToFile(scenePath);
     }
 }

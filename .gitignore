@@ -3,3 +3,5 @@
 /android/
 .vscode/
 .vs/
+/TkoUtilities/bin
+/TkoUtilities/obj

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Pong_1.Scripts.Utilities;
+namespace TkoUtilities.Utilities;
 
 public static class Sprite2DExtension
 {
