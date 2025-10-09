@@ -10,27 +10,14 @@ internal class Deflated : State
     public Deflated(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
         this.playerContext = playerContext;
-        this.Name = nameof(Deflated);
     }
 
-    protected override State GetTransition()
-    {
-        if (playerContext.KeyToInflateIsPressed)
-        {
-            return ((PlayerRoot)Parent).Inflating;
-        }
+    protected override State GetTransition() => playerContext.KeyToInflateIsPressed ? ((Idle)Parent).inflating : null;
 
-        if (playerContext.KeyToBlockJustPressed)
-        {
-            return ()
-        }
 
-        return null;
-    }
     protected override void OnEnter()
     {
-        var currentVelocity = playerContext.player.Velocity;
-
-        GD.Print("On enter Deflated");
+        playerContext.player.Velocity = new Vector2(0, playerContext.MaximumSpeedDeflating);
+        GD.Print("OnEnter Deflated");
     }
 }

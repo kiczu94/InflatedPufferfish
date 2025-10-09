@@ -5,23 +5,46 @@ namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
 
 internal class Inflating : State
 {
-/*    public readonly Deflating Deflating;
-
-    public readonly Inflated Inflated;*/
-    
-    readonly PlayerContext context;
+    readonly PlayerContext playerContext;
 
     public Inflating(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
-        context = playerContext;
+        this.playerContext = playerContext;
         this.Name = "Inflating";
     }
 
     protected override State GetInitialState() => null;
-    protected override State GetTransition() => context.KeyToInflateIsPressed ? null : ((PlayerRoot)Parent).Deflated;
+    protected override State GetTransition()
+    {
+        if (playerContext.player.Velocity.Y == playerContext.MaximumSpeedInflating)
+        {
+            return ((Idle)Parent).inflated;
+        }
+
+        if (playerContext.KeyToFastDeflateJustPressed)
+        {
+            return ((Idle)Parent).deflated;
+        }
+
+        if (!playerContext.KeyToInflateIsPressed)
+        {
+            return ((Idle)Parent).deflating;
+        }
+
+        return null;
+    }
 
     protected override void OnEnter()
     {
-        GD.Print("On enter Inflating");
+        GD.Print("OnEnter Inflating");
+    }
+
+    protected override void OnUpdate(double deltaTime)
+    {
+        if (playerContext.player.Velocity.Y != playerContext.MaximumSpeedInflating)
+        {
+            var currentVelocity = playerContext.player.Velocity;
+            playerContext.player.Velocity = currentVelocity + new Vector2(0, -1);
+        }
     }
 }

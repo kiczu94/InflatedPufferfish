@@ -10,6 +10,8 @@ public class PlayerContext
     public bool IsAttacking;
     public byte BodySizeFrameNumber;
     public byte AttackingFrameNumber;
+    public readonly float MaximumSpeedDeflating = 100f;
+    public readonly float MaximumSpeedInflating = -100f;
 
     public CharacterBody2D player;
 }

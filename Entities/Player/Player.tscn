@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cojxqsvcymxxm"]
+
+[ext_resource type="Script" uid="uid://dpv7r2skdbf7n" path="res://Entities/Player/Scripts/Player.cs" id="1_lu8i8"]
+[ext_resource type="Script" uid="uid://cvk7i0dbsy1da" path="res://Entities/Player/Scripts/PlayerStateMachine/PlayerStateDriver.cs" id="2_tekja"]
+[ext_resource type="Texture2D" uid="uid://cuc08ym358eoy" path="res://Entities/Player/Sprites/FishPlaceholder.png" id="3_5c2io"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mxblw"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_lu8i8")
+
+[node name="PlayerStateDriver" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_tekja")
+player = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(30, 90)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_5c2io")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(30, 90)
+shape = SubResource("CircleShape2D_mxblw")
