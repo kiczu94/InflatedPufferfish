@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0bc7v4fcqpg0"]
+
+[ext_resource type="Texture2D" uid="uid://csages8kniern" path="res://Entities/Obstacle/Sprites/Player.png" id="1_vx6xr"]
+[ext_resource type="Script" uid="uid://bkr18qkmtersk" path="res://Entities/Obstacle/Scripts/Obstacle.cs" id="2_7ex77"]
+[ext_resource type="Script" uid="uid://3wr5r41frxf1" path="res://Entities/Obstacle/Scripts/ObstacleArea2d.cs" id="3_ov7ky"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ex77"]
+size = Vector2(20, 248)
+
+[node name="Obstacle" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_vx6xr")
+script = ExtResource("2_7ex77")
+
+[node name="ObstacleArea2D" type="Area2D" parent="."]
+script = ExtResource("3_ov7ky")
+
+[node name="ObstacleCollisionShape" type="CollisionShape2D" parent="ObstacleArea2D"]
+shape = SubResource("RectangleShape2D_7ex77")
+
+[connection signal="body_entered" from="ObstacleArea2D" to="." method="OnBodyEntered"]

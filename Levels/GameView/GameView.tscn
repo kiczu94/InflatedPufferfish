@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bebtg0arujujm" path="res://Levels/GameView/background.png" id="1_mxblw"]
 [ext_resource type="PackedScene" uid="uid://cojxqsvcymxxm" path="res://Entities/Player/Player.tscn" id="2_h1phh"]
-[ext_resource type="PackedScene" uid="uid://bo020fhv5hcgx" path="res://Entities/Obstacle/PlaceholderObstacle.tscn" id="3_0j55i"]
+[ext_resource type="Script" uid="uid://cjgfdbmpg4scx" path="res://Systems/ObstacleSpawner.cs" id="3_0j55i"]
 
 [node name="GameView" type="Node"]
 
@@ -14,4 +14,5 @@ texture = ExtResource("1_mxblw")
 
 [node name="Player" parent="." instance=ExtResource("2_h1phh")]
 
-[node name="PlaceholderObstacle" parent="." instance=ExtResource("3_0j55i")]
+[node name="ObstacleSpawner" type="Node" parent="."]
+script = ExtResource("3_0j55i")
