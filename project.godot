@@ -33,6 +33,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="InflatedPufferfish"
 
+[global_group]
+
+Player=""
+
 [input]
 
 InflateKey={

@@ -15,10 +15,8 @@ script = ExtResource("2_tekja")
 player = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(30, 90)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_5c2io")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(30, 90)
 shape = SubResource("CircleShape2D_mxblw")
