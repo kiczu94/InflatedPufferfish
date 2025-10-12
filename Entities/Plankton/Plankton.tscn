@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdws2xmqmg7bv"]
 
 [ext_resource type="Texture2D" uid="uid://c7iu1kumqnb61" path="res://Entities/Plankton/Sprites/PlanktonPlaceholder.png" id="1_oc6l2"]
-[ext_resource type="Script" uid="uid://be86dixn2uq11" path="res://Entities/Plankton/Scripts/Plankton.cs" id="2_lxqju"]
-[ext_resource type="Script" uid="uid://ct2wp08n5ivbh" path="res://Entities/Plankton/Scripts/PlanktonArea.cs" id="3_xosr3"]
+[ext_resource type="Script" uid="uid://buvpcrj3eq1jd" path="res://Entities/Plankton/Scripts/Plankton.cs" id="2_lxqju"]
+[ext_resource type="Script" uid="uid://b4jos8gflpmmw" path="res://Entities/Plankton/Scripts/PlanktonArea.cs" id="3_xosr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndw1j"]
 size = Vector2(16, 16)
