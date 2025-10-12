@@ -12,6 +12,9 @@ public partial class ObstacleArea2d : Area2D
 
     public void OnBodyEntered(Node2D body)
     {
-        EventBus<FishObstacleCollidedEvent>.Raise(new FishObstacleCollidedEvent());
+        if (body.GetGroups().Contains("Player"))
+        {
+            EventBus<FishObstacleCollidedEvent>.Raise(new FishObstacleCollidedEvent());
+        }
     }
 }

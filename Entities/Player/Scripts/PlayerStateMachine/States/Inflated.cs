@@ -1,35 +1,34 @@
 using Godot;
 using TkoUtilities.Hsm;
 
-namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States
+namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
+
+internal class Inflated : State
 {
-    internal class Inflated : State
+    readonly PlayerContext playerContext;
+
+    public Inflated(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
-        readonly PlayerContext PlayerContext;
+        this.playerContext = playerContext;
+    }
 
-        public Inflated(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
+    protected override State GetTransition()
+    {
+        if(playerContext.KeyToFastDeflateJustPressed)
         {
-            PlayerContext = playerContext;
+            return ((Idle)Parent).deflated;
         }
 
-        protected override State GetTransition()
+        if (!playerContext.KeyToInflateIsPressed)
         {
-            if(PlayerContext.KeyToFastDeflateJustPressed)
-            {
-                return ((Idle)Parent).deflated;
-            }
-
-            if (!PlayerContext.KeyToInflateIsPressed)
-            {
-                return ((Idle)Parent).deflating;
-            }
-
-            return null;
+            return ((Idle)Parent).deflating;
         }
 
-        protected override void OnEnter()
-        {
-            GD.Print("OnEnter Inflated");
-        }
+        return null;
+    }
+
+    protected override void OnEnter()
+    {
+        GD.Print("OnEnter Inflated");
     }
 }

@@ -1,7 +1,10 @@
 using Godot;
 using InflatedPufferfish.Constants;
 using InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
+using InflatedPufferfish.Events;
+using TkoUtilities.EventBus;
 using TkoUtilities.Hsm;
+
 namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine;
 
 internal partial class PlayerStateDriver : Node
@@ -9,18 +12,20 @@ internal partial class PlayerStateDriver : Node
     [Export]
     public CharacterBody2D player;
 
-    public StateMachine stateMachine;
-
-    public PlayerContext ctx = new PlayerContext();
-
     private string lastPath;
+    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
+    private PlayerContext playerContext = new PlayerContext();
     private State root;
+    private StateMachine stateMachine;
+
 
     public override void _Ready()
     {
-        root = new PlayerRoot(null, ctx);
+        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        root = new PlayerRoot(null, playerContext);
         stateMachine = new StateMachineBuilder(root).Build();
-        ctx.player = player;
+        playerContext.Player = player;
         base._Ready();
     }
 
@@ -42,9 +47,9 @@ internal partial class PlayerStateDriver : Node
 
     private void ResetContextButtonsData()
     {
-        ctx.KeyToFastDeflateJustPressed = false;
-        ctx.KeyToInflateIsPressed = false;
-        ctx.KeyToBlockJustPressed = false;
+        playerContext.KeyToFastDeflateJustPressed = false;
+        playerContext.KeyToInflateIsPressed = false;
+        playerContext.KeyToBlockJustPressed = false;
     }
 
     private void UpdateLastPath()
@@ -61,17 +66,22 @@ internal partial class PlayerStateDriver : Node
     {
         if (Input.IsActionPressed(Actions.Inflating))
         {
-            ctx.KeyToInflateIsPressed = true;
+            playerContext.KeyToInflateIsPressed = true;
         }
 
         if (Input.IsActionJustPressed(Actions.FastDeflate))
         {
-            ctx.KeyToFastDeflateJustPressed = true;
+            playerContext.KeyToFastDeflateJustPressed = true;
         }
 
         if (Input.IsActionJustPressed(Actions.Block))
         {
-            ctx.KeyToBlockJustPressed = true;
+            playerContext.KeyToBlockJustPressed = true;
         }
+    }
+
+    private void OnFishObstacleCollidedEvent()
+    {
+        playerContext.PlayerLost = true;
     }
 }

@@ -8,10 +8,11 @@ public class PlayerContext
     public bool KeyToFastDeflateJustPressed;
     public bool KeyToBlockJustPressed;
     public bool IsAttacking;
+    public bool PlayerLost;
     public byte BodySizeFrameNumber;
     public byte AttackingFrameNumber;
     public readonly float MaximumSpeedDeflating = 100f;
     public readonly float MaximumSpeedInflating = -100f;
 
-    public CharacterBody2D player;
+    public CharacterBody2D Player;
 }

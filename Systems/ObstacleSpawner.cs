@@ -5,20 +5,21 @@ using TkoUtilities.EventBus;
 
 public partial class ObstacleSpawner : Node
 {
-    bool TimeToSpawn = true;
-    EventBinding<ObstacleOutOfFieldView> ObstacleOutOfFieldViewEventBinding;
-    EventBinding<SpawnObstacleEvent> SpawnObstacleEventBinding;
+    private bool timeToSpawn = true;
 
-    Pool<Obstacle> obstaclePool = new();
-    PackedScene Obstacle;
+    private PackedScene obstacle;
+    
+    private EventBinding<ObstacleOutOfFieldView> obstacleOutOfFieldViewEventBinding;
+    private EventBinding<SpawnObstacleEvent> spawnObstacleEventBinding;
+    private Pool<Obstacle> obstaclePool = new();
 
     public override void _Ready()
     {
-        Obstacle = ResourceLoader.Load("res://Entities/Obstacle/Obstacle.tscn") as PackedScene;
-        ObstacleOutOfFieldViewEventBinding = new EventBinding<ObstacleOutOfFieldView>(OnObstacleOutOfFieldViewEvent);
-        SpawnObstacleEventBinding = new EventBinding<SpawnObstacleEvent>(OnSpawnObstacleEvent);
-        EventBus<SpawnObstacleEvent>.Register(SpawnObstacleEventBinding);
-        EventBus<ObstacleOutOfFieldView>.Register(ObstacleOutOfFieldViewEventBinding);
+        obstacle = ResourceLoader.Load("res://Entities/Obstacle/Obstacle.tscn") as PackedScene;
+        obstacleOutOfFieldViewEventBinding = new EventBinding<ObstacleOutOfFieldView>(OnObstacleOutOfFieldViewEvent);
+        spawnObstacleEventBinding = new EventBinding<SpawnObstacleEvent>(OnSpawnObstacleEvent);
+        EventBus<SpawnObstacleEvent>.Register(spawnObstacleEventBinding);
+        EventBus<ObstacleOutOfFieldView>.Register(obstacleOutOfFieldViewEventBinding);
         base._Ready();
     }
 
@@ -37,7 +38,7 @@ public partial class ObstacleSpawner : Node
 
     private Obstacle SpawnNewObstacle()
     {
-        var obstacle = Obstacle.Instantiate() as Obstacle;
+        var obstacle = this.obstacle.Instantiate() as Obstacle;
         AddChild(obstacle);
         return obstacle;
     }

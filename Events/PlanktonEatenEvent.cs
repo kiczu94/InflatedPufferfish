@@ -2,4 +2,4 @@ using TkoUtilities.EventBus;
 
 namespace InflatedPufferfish.Events;
 
-public record PlanktonEatenEvent(ulong Id): IEvent;
+internal record PlanktonEatenEvent(ulong Id): IEvent;

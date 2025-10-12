@@ -3,17 +3,14 @@ using TkoUtilities.Hsm;
 
 namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
 
-internal class Deflated : State
+public class Lost : State
 {
-    private readonly PlayerContext playerContext;
-
-    public Deflated(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
+    private PlayerContext playerContext;
+    
+    public Lost(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
         this.playerContext = playerContext;
     }
-
-    protected override State GetTransition() => playerContext.KeyToInflateIsPressed ? ((Idle)Parent).inflating : null;
-
 
     protected override void OnEnter()
     {

@@ -5,22 +5,22 @@ using TkoUtilities.EventBus;
 
 public partial class PlanktonSpawner : Node
 {
-    private EventBinding<SpawnPlanktonEvent> SpawnPlanktonEventBinding;
-    private EventBinding<PlanktonOutOfFieldView> PlanktonOutOfFieldViewEventBinding;
-    private EventBinding<PlanktonEatenEvent> PlanktonEatenEventBinding;
+    private PackedScene plankton;
+    private EventBinding<SpawnPlanktonEvent> spawnPlanktonEventBinding;
+    private EventBinding<PlanktonOutOfFieldView> planktonOutOfFieldViewEventBinding;
+    private EventBinding<PlanktonEatenEvent> planktonEatenEventBinding;
+    private Pool<Plankton> planktonPool = new();
 
-    PackedScene Plankton;
-    Pool<Plankton> planktonPool = new();
 
     public override void _Ready()
     {
-        Plankton = ResourceLoader.Load("res://Entities/Plankton/Plankton.tscn") as PackedScene;
-        SpawnPlanktonEventBinding = new EventBinding<SpawnPlanktonEvent>(OnSpawnPlanktonEvent);
-        PlanktonOutOfFieldViewEventBinding = new EventBinding<PlanktonOutOfFieldView>(OnPlanktonOutOfFieldView);
-        PlanktonEatenEventBinding = new EventBinding<PlanktonEatenEvent>(OnPlanktonEatenEvent);
-        EventBus<SpawnPlanktonEvent>.Register(SpawnPlanktonEventBinding);
-        EventBus<PlanktonOutOfFieldView>.Register(PlanktonOutOfFieldViewEventBinding);
-        EventBus<PlanktonEatenEvent>.Register(PlanktonEatenEventBinding);
+        plankton = ResourceLoader.Load("res://Entities/Plankton/Plankton.tscn") as PackedScene;
+        spawnPlanktonEventBinding = new EventBinding<SpawnPlanktonEvent>(OnSpawnPlanktonEvent);
+        planktonOutOfFieldViewEventBinding = new EventBinding<PlanktonOutOfFieldView>(OnPlanktonOutOfFieldView);
+        planktonEatenEventBinding = new EventBinding<PlanktonEatenEvent>(OnPlanktonEatenEvent);
+        EventBus<SpawnPlanktonEvent>.Register(spawnPlanktonEventBinding);
+        EventBus<PlanktonOutOfFieldView>.Register(planktonOutOfFieldViewEventBinding);
+        EventBus<PlanktonEatenEvent>.Register(planktonEatenEventBinding);
         base._Ready();
     }
 
@@ -42,7 +42,7 @@ public partial class PlanktonSpawner : Node
 
     private Plankton Instantiate()
     {
-        var plankton = Plankton.Instantiate() as Plankton;
+        var plankton = this.plankton.Instantiate() as Plankton;
         AddChild(plankton);
         return plankton;
     }

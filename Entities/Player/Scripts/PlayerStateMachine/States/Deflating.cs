@@ -5,28 +5,28 @@ using TkoUtilities.Hsm;
 
 namespace inflatedpufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
 
-public class Deflating : State
+internal class Deflating : State
 {
-    readonly PlayerContext PlayerContext;
+    private readonly PlayerContext playerContext;
     
     public Deflating(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
-        PlayerContext = playerContext;
+        this.playerContext = playerContext;
     }
 
     protected override State GetTransition()
     {
-        if (PlayerContext.KeyToFastDeflateJustPressed)
+        if (playerContext.KeyToFastDeflateJustPressed)
         {
             return ((Idle)Parent).deflated;
         }
 
-        if (PlayerContext.KeyToInflateIsPressed)
+        if (playerContext.KeyToInflateIsPressed)
         {
             return ((Idle)Parent).inflating;
         }
 
-        if(PlayerContext.player.Velocity.Y == PlayerContext.MaximumSpeedDeflating)
+        if(playerContext.Player.Velocity.Y == playerContext.MaximumSpeedDeflating)
         {
             return ((Idle)Parent).deflated;
         }
@@ -41,10 +41,10 @@ public class Deflating : State
 
     protected override void OnUpdate(double deltaTime)
     {
-        if (PlayerContext.player.Velocity.Y != PlayerContext.MaximumSpeedDeflating)
+        if (playerContext.Player.Velocity.Y != playerContext.MaximumSpeedDeflating)
         {
-            var currentVelocity = PlayerContext.player.Velocity;
-            PlayerContext.player.Velocity = currentVelocity + new Vector2(0, 1);
+            var currentVelocity = playerContext.Player.Velocity;
+            playerContext.Player.Velocity = currentVelocity + new Vector2(0, 1);
         }
     }
 }

@@ -6,16 +6,32 @@ internal partial class PlayerRoot : State
 {
     public readonly Idle Idle;
     public readonly Blocking Blocking;
+    public readonly Lost Lost;
 
-    readonly PlayerContext context;
+    private readonly PlayerContext playerContext;
 
     public PlayerRoot(StateMachine stateMachine, PlayerContext playerContext) : base(stateMachine, null)
     {
-        this.context = playerContext;
-        Idle = new Idle(stateMachine, this, context);
-        Blocking = new Blocking(stateMachine, this, context);
+        this.playerContext = playerContext;
+        Idle = new Idle(stateMachine, this, this.playerContext);
+        Blocking = new Blocking(stateMachine, this, this.playerContext);
+        Lost = new Lost(stateMachine, this, playerContext);
     }
 
     protected override State GetInitialState() => Idle;
-    protected override State GetTransition() => context.KeyToBlockJustPressed ? Blocking : null;
+    protected override State GetTransition()
+    {
+        if (playerContext.PlayerLost)
+        {
+            return Lost;
+        }
+
+        if (playerContext.KeyToBlockJustPressed)
+        {
+            return Blocking; 
+        }
+
+        return null;
+
+    }
 }

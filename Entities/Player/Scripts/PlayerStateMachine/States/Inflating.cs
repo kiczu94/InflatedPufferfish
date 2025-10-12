@@ -16,7 +16,7 @@ internal class Inflating : State
     protected override State GetInitialState() => null;
     protected override State GetTransition()
     {
-        if (playerContext.player.Velocity.Y == playerContext.MaximumSpeedInflating)
+        if (playerContext.Player.Velocity.Y == playerContext.MaximumSpeedInflating)
         {
             return ((Idle)Parent).inflated;
         }
@@ -41,10 +41,10 @@ internal class Inflating : State
 
     protected override void OnUpdate(double deltaTime)
     {
-        if (playerContext.player.Velocity.Y != playerContext.MaximumSpeedInflating)
+        if (playerContext.Player.Velocity.Y != playerContext.MaximumSpeedInflating)
         {
-            var currentVelocity = playerContext.player.Velocity;
-            playerContext.player.Velocity = currentVelocity + new Vector2(0, -1);
+            var currentVelocity = playerContext.Player.Velocity;
+            playerContext.Player.Velocity = currentVelocity + new Vector2(0, -1);
         }
     }
 }

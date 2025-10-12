@@ -2,7 +2,7 @@ using Godot;
 using InflatedPufferfish.Events;
 using TkoUtilities.EventBus;
 
-public partial class Player : CharacterBody2D
+public partial class GameOverLabel : Label
 {
     private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
 
@@ -10,18 +10,11 @@ public partial class Player : CharacterBody2D
     {
         fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
         EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
-        Velocity = new Vector2 (0, 10);
         base._Ready();
     }
 
-    public override void _PhysicsProcess(double delta)
+    private void OnFishObstacleCollidedEvent()
     {
-        MoveAndSlide();
-        base._PhysicsProcess(delta);
-    }
-
-    public void OnFishObstacleCollidedEvent()
-    {
-        GD.Print("Fish collided");
+        Visible = true;
     }
 }

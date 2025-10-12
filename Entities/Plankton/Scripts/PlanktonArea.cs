@@ -4,11 +4,11 @@ using TkoUtilities.EventBus;
 
 public partial class PlanktonArea : Area2D
 {
-    Sprite2D MainSprite;
+    private Sprite2D mainSprite;
 
     public override void _Ready()
     {
-        MainSprite = GetParent<Sprite2D>();
+        mainSprite = GetParent<Sprite2D>();
         BodyEntered += OnBodyEntered;
         base._Ready();
     }
@@ -17,7 +17,7 @@ public partial class PlanktonArea : Area2D
     {
         if (body.GetGroups().Contains("Player"))
         {
-            EventBus<PlanktonEatenEvent>.Raise(new PlanktonEatenEvent(MainSprite.GetInstanceId()));
+            EventBus<PlanktonEatenEvent>.Raise(new PlanktonEatenEvent(mainSprite.GetInstanceId()));
         }
     }
 }

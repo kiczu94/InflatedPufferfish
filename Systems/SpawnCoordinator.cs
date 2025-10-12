@@ -4,18 +4,22 @@ using TkoUtilities.EventBus;
 
 public partial class SpawnCoordinator : Node
 {
+    private bool gameRunning = true;
     private bool spawnObstacle = true; 
-    private bool spawnPlankton = true; 
+    private bool spawnPlankton = true;
+    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
     private Random Random = new Random();
 
     public override void _Ready()
     {
+        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
         base._Ready();
     }
 
     public override void _Process(double delta)
     {
-        if (spawnObstacle)
+        if (gameRunning && spawnObstacle)
         {
             var (upObstacleYPosition, downObstacleYPosition, planktonPosition) = GetCoordinates();
             SpawnObstacle(upObstacleYPosition, downObstacleYPosition);
@@ -50,7 +54,7 @@ public partial class SpawnCoordinator : Node
         action.Invoke();
     }
 
-    public (int upObstacleY, int downObstacleY, int planktonY) GetCoordinates()
+    private (int upObstacleY, int downObstacleY, int planktonY) GetCoordinates()
     {
         var distanceBetweenPipes = Random.Next(150, 181);
         var upObstacleYPosition = Random.Next(-30, 21);
@@ -58,5 +62,10 @@ public partial class SpawnCoordinator : Node
         var planktonPosition = upObstacleYPosition + distanceBetweenPipes / 2;
 
         return (upObstacleYPosition, downObstacleYPosition, planktonPosition);
+    }
+
+    private void OnFishObstacleCollidedEvent()
+    {
+        gameRunning = false;
     }
 }

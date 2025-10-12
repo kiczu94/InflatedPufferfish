@@ -5,12 +5,12 @@ using TkoUtilities.EventBus;
 public partial class Score : Label
 {
     private int score = 0;
-    private EventBinding<PlanktonEatenEvent> PlanktonEatenEventBinding;
+    private EventBinding<PlanktonEatenEvent> planktonEatenEventBinding;
 
     public override void _Ready()
     {
-        PlanktonEatenEventBinding = new EventBinding<PlanktonEatenEvent>(OnPlanktonEatenEvent);
-        EventBus<PlanktonEatenEvent>.Register(PlanktonEatenEventBinding);
+        planktonEatenEventBinding = new EventBinding<PlanktonEatenEvent>(OnPlanktonEatenEvent);
+        EventBus<PlanktonEatenEvent>.Register(planktonEatenEventBinding);
         Text = score.ToString();
         base._Ready();
     }
