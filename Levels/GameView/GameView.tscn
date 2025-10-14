@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgcjlwrybi4km"]
+[gd_scene load_steps=9 format=3 uid="uid://cgcjlwrybi4km"]
 
 [ext_resource type="Texture2D" uid="uid://bebtg0arujujm" path="res://Levels/GameView/background.png" id="1_mxblw"]
+[ext_resource type="Script" uid="uid://gl67gxav1tja" path="res://Levels/GameView/Scripts/GameView.cs" id="1_wdihs"]
 [ext_resource type="PackedScene" uid="uid://cojxqsvcymxxm" path="res://Entities/Player/Player.tscn" id="2_h1phh"]
 [ext_resource type="Script" uid="uid://cjgfdbmpg4scx" path="res://Systems/ObstacleSpawner.cs" id="3_0j55i"]
 [ext_resource type="Script" uid="uid://d3j25cyu3ajas" path="res://Systems/SpawnCoordinator.cs" id="4_ndw1j"]
@@ -9,29 +10,39 @@
 [ext_resource type="Script" uid="uid://b336erohof6yt" path="res://Systems/EnemySpawner.cs" id="6_wdihs"]
 
 [node name="GameView" type="Node"]
+process_mode = 3
+script = ExtResource("1_wdihs")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 1
 position = Vector2(160, 90)
 metadata/_edit_lock_ = true
 
 [node name="Backgorund" type="Sprite2D" parent="."]
+process_mode = 1
 texture = ExtResource("1_mxblw")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_h1phh")]
+process_mode = 1
 z_index = 1
 position = Vector2(40, 80)
 
 [node name="SpawnCoordinator" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("4_ndw1j")
 
 [node name="ObstacleSpawner" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("3_0j55i")
 
 [node name="PlanktonSpawner" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("6_ag8a2")
 
 [node name="EnemySpawner" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("6_wdihs")
 
 [node name="HUD" parent="." instance=ExtResource("6_m7c7d")]
+process_mode = 3

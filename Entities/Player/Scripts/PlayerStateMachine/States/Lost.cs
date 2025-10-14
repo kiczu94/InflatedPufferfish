@@ -15,6 +15,5 @@ public class Lost : State
     protected override void OnEnter()
     {
         playerContext.Player.Velocity = new Vector2(0, playerContext.MaximumSpeedDeflating);
-        GD.Print("OnEnter Deflated");
     }
 }

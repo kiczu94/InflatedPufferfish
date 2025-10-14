@@ -4,14 +4,9 @@ using TkoUtilities.EventBus;
 
 public partial class Obstacle : Sprite2D
 {
-    private bool gameRunning = true;
     private readonly Vector2 movingSpeed = new(-30, 0);
-    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
-
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
         base._Ready();
     }
 
@@ -32,14 +27,6 @@ public partial class Obstacle : Sprite2D
 
     private void ProcessMovement(double delta)
     {
-        if (gameRunning)
-        {
-            Position += movingSpeed * (float)delta;
-        }
-    }
-
-    private void OnFishObstacleCollidedEvent()
-    {
-        gameRunning = false;
+        Position += movingSpeed * (float)delta;
     }
 }
