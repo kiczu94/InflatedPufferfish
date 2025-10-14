@@ -2,7 +2,7 @@ using Godot;
 using InflatedPufferfish.Events;
 using TkoUtilities.EventBus;
 
-public partial class Plankton : Sprite2D
+public partial class Enemy : Sprite2D
 {
     private bool gameRunning = true;
     private readonly Vector2 movingSpeed = new(-30, 0);
@@ -15,6 +15,7 @@ public partial class Plankton : Sprite2D
         base._Ready();
     }
 
+    
     public override void _Process(double delta)
     {
         ProcessMovement(delta);
@@ -26,7 +27,7 @@ public partial class Plankton : Sprite2D
     {
         if (Position.X < -30)
         {
-            EventBus<ObstacleOutOfFieldView>.Raise(new ObstacleOutOfFieldView(this.GetInstanceId()));
+            EventBus<EnemyOutOfFieldView>.Raise(new EnemyOutOfFieldView(this.GetInstanceId()));
         }
     }
 

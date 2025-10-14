@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c34grula7lmny"]
+
+[ext_resource type="Texture2D" uid="uid://k8dcvtionpc0" path="res://Entities/Enemies/Sprites/Sprite-0002.png" id="1_ttlo4"]
+[ext_resource type="Script" uid="uid://d4j3uyv0nup1p" path="res://Entities/Enemies/Scripts/Enemy.cs" id="2_fln2h"]
+[ext_resource type="Script" uid="uid://bloqggvr7ye6l" path="res://Entities/Enemies/Scripts/EnemyArea2d.cs" id="3_yxp7e"]
+
+[node name="Enemy" type="Sprite2D"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_ttlo4")
+script = ExtResource("2_fln2h")
+
+[node name="EnemyArea2D" type="Area2D" parent="."]
+script = ExtResource("3_yxp7e")
+
+[node name="EnemyCollisionShape" type="CollisionPolygon2D" parent="EnemyArea2D"]
+polygon = PackedVector2Array(8.333333, 8.333333, 8.333333, -8.333333, 0, -8.333333, -6.6666665, 0, 0, 8.333333)

@@ -4,12 +4,12 @@ using TkoUtilities.EventBus;
 
 public partial class Player : CharacterBody2D
 {
-    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
+    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
 
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
         Velocity = new Vector2 (0, 10);
         base._Ready();
     }

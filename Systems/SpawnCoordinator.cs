@@ -7,13 +7,15 @@ public partial class SpawnCoordinator : Node
     private bool gameRunning = true;
     private bool spawnObstacle = true; 
     private bool spawnPlankton = true;
-    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
-    private Random Random = new Random();
+    private bool spawnEnemy = false;
+    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
+    private Random random = new Random();
 
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        _ = Wait(16000, () => spawnEnemy = true);
         base._Ready();
     }
 
@@ -21,9 +23,10 @@ public partial class SpawnCoordinator : Node
     {
         if (gameRunning && spawnObstacle)
         {
-            var (upObstacleYPosition, downObstacleYPosition, planktonPosition) = GetCoordinates();
+            var (upObstacleYPosition, downObstacleYPosition, gapCenter) = GetCoordinates();
             SpawnObstacle(upObstacleYPosition, downObstacleYPosition);
-            SpawnPlankton(planktonPosition);
+            SpawnPlankton(gapCenter);
+            SpawnEnemy(gapCenter);
         }
         base._Process(delta);
     }
@@ -32,8 +35,8 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnPlankton)
         {
-            _ = Wait(10000, () => { spawnPlankton = !spawnPlankton; });
-            spawnPlankton = !spawnPlankton;
+            _ = Wait(10000, () => { spawnPlankton = true; });
+            spawnPlankton = false;
             EventBus<SpawnPlanktonEvent>.Raise(new SpawnPlanktonEvent(planktonPosition));
         }
     }
@@ -42,9 +45,23 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnObstacle)
         {
-            _ = Wait(2000, () => { spawnObstacle = !spawnObstacle; });
-            spawnObstacle = !spawnObstacle;
+            _ = Wait(2000, () => { spawnObstacle = true; });
+            spawnObstacle = false;
             EventBus<SpawnObstacleEvent>.Raise(new SpawnObstacleEvent(upObstacleYPosition, downObstacleYPosition));
+        }
+    }
+
+    private void SpawnEnemy(int positionY)
+    {
+        if (spawnEnemy)
+        {
+            _ = Wait(16000,
+                () =>
+                {
+                    spawnEnemy = true;
+                    EventBus<SpawnEnemyEvent>.Raise(new SpawnEnemyEvent(positionY));
+                });
+            spawnEnemy = false;
         }
     }
 
@@ -54,14 +71,14 @@ public partial class SpawnCoordinator : Node
         action.Invoke();
     }
 
-    private (int upObstacleY, int downObstacleY, int planktonY) GetCoordinates()
+    private (int upObstacleY, int downObstacleY, int gapCenter) GetCoordinates()
     {
-        var distanceBetweenPipes = Random.Next(150, 181);
-        var upObstacleYPosition = Random.Next(-30, 21);
+        var distanceBetweenPipes = random.Next(150, 181);
+        var upObstacleYPosition = random.Next(-30, 21);
         var downObstacleYPosition = upObstacleYPosition + distanceBetweenPipes;
-        var planktonPosition = upObstacleYPosition + distanceBetweenPipes / 2;
+        var gapCenter = upObstacleYPosition + distanceBetweenPipes / 2;
 
-        return (upObstacleYPosition, downObstacleYPosition, planktonPosition);
+        return (upObstacleYPosition, downObstacleYPosition, gapCenter);
     }
 
     private void OnFishObstacleCollidedEvent()

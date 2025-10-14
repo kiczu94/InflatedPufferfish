@@ -6,12 +6,12 @@ public partial class Obstacle : Sprite2D
 {
     private bool gameRunning = true;
     private readonly Vector2 movingSpeed = new(-30, 0);
-    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
+    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
 
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
         base._Ready();
     }
 

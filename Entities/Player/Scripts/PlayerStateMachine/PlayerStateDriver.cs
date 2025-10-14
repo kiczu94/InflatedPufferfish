@@ -13,7 +13,7 @@ internal partial class PlayerStateDriver : Node
     public CharacterBody2D player;
 
     private string lastPath;
-    private EventBinding<FishObstacleCollidedEvent> fishObstacleCollidedEventBinding;
+    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
     private PlayerContext playerContext = new PlayerContext();
     private State root;
     private StateMachine stateMachine;
@@ -21,8 +21,8 @@ internal partial class PlayerStateDriver : Node
 
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<FishObstacleCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<FishObstacleCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
+        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
         root = new PlayerRoot(null, playerContext);
         stateMachine = new StateMachineBuilder(root).Build();
         playerContext.Player = player;

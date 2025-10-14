@@ -1,14 +1,13 @@
 using Godot;
 using InflatedPufferfish.Events;
+using System;
 using TkoUtilities.EventBus;
 
-public partial class PlanktonArea : Area2D
+public partial class EnemyArea2d : Area2D
 {
-    private ulong parentId;
-
+    
     public override void _Ready()
     {
-        parentId = GetParent<Sprite2D>().GetInstanceId();
         BodyEntered += OnBodyEntered;
         base._Ready();
     }
@@ -17,7 +16,7 @@ public partial class PlanktonArea : Area2D
     {
         if (body.GetGroups().Contains("Player"))
         {
-            EventBus<PlanktonEatenEvent>.Raise(new PlanktonEatenEvent(parentId));
+            //EventBus<PlayerCollidedEvent>.Raise(new PlayerCollidedEvent());
         }
     }
 }

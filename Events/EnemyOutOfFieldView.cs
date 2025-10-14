@@ -2,4 +2,4 @@ using TkoUtilities.EventBus;
 
 namespace InflatedPufferfish.Events;
 
-internal record FishObstacleCollidedEvent() : IEvent;
+public record EnemyOutOfFieldView(ulong Id) : IEvent;
