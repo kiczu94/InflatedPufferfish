@@ -5,7 +5,7 @@ using TkoUtilities.EventBus;
 public partial class SpawnCoordinator : Node
 {
     private bool gameRunning = true;
-    private bool spawnObstacle = true; 
+    private bool spawnObstacle = true;
     private bool spawnPlankton = true;
     private bool spawnEnemy = false;
     private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
@@ -15,7 +15,7 @@ public partial class SpawnCoordinator : Node
     {
         fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
         EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
-        _ = Wait(16000, () => spawnEnemy = true);
+        _ = Wait(6000, () => { spawnEnemy = true; });
         base._Ready();
     }
 
@@ -55,7 +55,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnEnemy)
         {
-            _ = Wait(16000,
+            _ = Wait(6000,
                 () =>
                 {
                     spawnEnemy = true;

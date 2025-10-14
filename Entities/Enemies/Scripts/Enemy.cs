@@ -5,7 +5,7 @@ using TkoUtilities.EventBus;
 public partial class Enemy : Sprite2D
 {
     private bool gameRunning = true;
-    private readonly Vector2 movingSpeed = new(-30, 0);
+    private readonly Vector2 movingSpeed = new(-90  , 0);
     private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
 
     public override void _Ready()

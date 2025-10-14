@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgcjlwrybi4km"]
+[gd_scene load_steps=8 format=3 uid="uid://cgcjlwrybi4km"]
 
 [ext_resource type="Texture2D" uid="uid://bebtg0arujujm" path="res://Levels/GameView/background.png" id="1_mxblw"]
 [ext_resource type="PackedScene" uid="uid://cojxqsvcymxxm" path="res://Entities/Player/Player.tscn" id="2_h1phh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d3j25cyu3ajas" path="res://Systems/SpawnCoordinator.cs" id="4_ndw1j"]
 [ext_resource type="Script" uid="uid://buki0kuix7amh" path="res://Systems/PlanktonSpawner.cs" id="6_ag8a2"]
 [ext_resource type="PackedScene" uid="uid://d5okqjrfe8rb" path="res://Levels/GameView/Hud.tscn" id="6_m7c7d"]
+[ext_resource type="Script" uid="uid://b336erohof6yt" path="res://Systems/EnemySpawner.cs" id="6_wdihs"]
 
 [node name="GameView" type="Node"]
 
@@ -29,5 +30,8 @@ script = ExtResource("3_0j55i")
 
 [node name="PlanktonSpawner" type="Node" parent="."]
 script = ExtResource("6_ag8a2")
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("6_wdihs")
 
 [node name="HUD" parent="." instance=ExtResource("6_m7c7d")]
