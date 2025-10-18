@@ -12,23 +12,36 @@ internal class Deflating : State
     public Deflating(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
         this.playerContext = playerContext;
+        this.Name = "Deflating";
     }
 
     protected override State GetTransition()
     {
         if (playerContext.KeyToFastDeflateJustPressed)
         {
-            return ((Idle)Parent).deflated;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflated,
+                _ => ((Blocking)Parent).deflated,
+            };
         }
 
         if (playerContext.KeyToInflateIsPressed)
         {
-            return ((Idle)Parent).inflating;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).inflating,
+                _ => ((Blocking)Parent).inflating,
+            };
         }
 
         if(playerContext.Player.Velocity.Y == playerContext.MaximumSpeedDeflating)
         {
-            return ((Idle)Parent).deflated;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflated,
+                _ => ((Blocking)Parent).deflated,
+            };
         }
 
         return null;

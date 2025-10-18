@@ -16,9 +16,11 @@ internal partial class PlayerRoot : State
         Idle = new Idle(stateMachine, this, this.playerContext);
         Blocking = new Blocking(stateMachine, this, this.playerContext);
         Lost = new Lost(stateMachine, this, playerContext);
+        this.Name = "PlayerRoot";
     }
 
     protected override State GetInitialState() => Idle;
+
     protected override State GetTransition()
     {
         if (playerContext.PlayerLost)
@@ -32,6 +34,5 @@ internal partial class PlayerRoot : State
         }
 
         return null;
-
     }
 }

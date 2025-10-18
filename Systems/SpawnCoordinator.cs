@@ -1,5 +1,6 @@
 using Godot;
 using InflatedPufferfish.Events;
+using InflatedPufferfish.TkoUtilities.Utilities;
 using TkoUtilities.EventBus;
 
 public partial class SpawnCoordinator : Node
@@ -15,7 +16,7 @@ public partial class SpawnCoordinator : Node
     {
         fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
         EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
-        _ = Wait(6000, () => { spawnEnemy = true; });
+        _ = Wait.For(6000, () => { spawnEnemy = true; });
         base._Ready();
     }
 
@@ -35,7 +36,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnPlankton)
         {
-            _ = Wait(10000, () => { spawnPlankton = true; });
+            _ = Wait.For(10000, () => { spawnPlankton = true; });
             spawnPlankton = false;
             EventBus<SpawnPlanktonEvent>.Raise(new SpawnPlanktonEvent(planktonPosition));
         }
@@ -45,7 +46,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnObstacle)
         {
-            _ = Wait(2000, () => { spawnObstacle = true; });
+            _ = Wait.For(2000, () => { spawnObstacle = true; });
             spawnObstacle = false;
             EventBus<SpawnObstacleEvent>.Raise(new SpawnObstacleEvent(upObstacleYPosition, downObstacleYPosition));
         }
@@ -55,7 +56,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnEnemy)
         {
-            _ = Wait(6000,
+            _ = Wait.For(6000,
                 () =>
                 {
                     spawnEnemy = true;
@@ -63,12 +64,6 @@ public partial class SpawnCoordinator : Node
                 });
             spawnEnemy = false;
         }
-    }
-
-    private async Task Wait(int miliseconds, Action action)
-    {
-        await Task.Delay(miliseconds);
-        action.Invoke();
     }
 
     private (int upObstacleY, int downObstacleY, int gapCenter) GetCoordinates()

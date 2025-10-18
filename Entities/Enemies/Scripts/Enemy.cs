@@ -1,23 +1,27 @@
 using Godot;
+using InflatedPufferfish.Entities.Enemies.Scripts.EnemyStateMachine;
 using InflatedPufferfish.Events;
 using TkoUtilities.EventBus;
 
 public partial class Enemy : Sprite2D
 {
-    private readonly Vector2 movingSpeed = new(-90  , 0);
-    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
+    EnemyStateDriver enemyStateDriver;
 
     public override void _Ready()
     {
+        enemyStateDriver = GetNode<EnemyStateDriver>("EnemyStateDriver");
         base._Ready();
     }
 
-    
     public override void _Process(double delta)
     {
-        ProcessMovement(delta);
         NotifyIfOutOfView();
         base._Process(delta);
+    }
+
+    public void SetIsDead(bool isDead = false)
+    {
+        enemyStateDriver.SetIsDead(isDead);
     }
 
     private void NotifyIfOutOfView()
@@ -26,12 +30,11 @@ public partial class Enemy : Sprite2D
         {
             EventBus<EnemyOutOfFieldView>.Raise(new EnemyOutOfFieldView(this.GetInstanceId()));
         }
+
+        if (Position.Y > 200)
+        {
+            EventBus<EnemyOutOfFieldView>.Raise(new EnemyOutOfFieldView(this.GetInstanceId()));
+        }
     }
 
-    private void ProcessMovement(double delta)
-    {
-        
-            Position += movingSpeed * (float)delta;
-        
-    }
 }

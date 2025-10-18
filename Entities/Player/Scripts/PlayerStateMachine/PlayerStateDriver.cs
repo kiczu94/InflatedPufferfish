@@ -10,7 +10,7 @@ namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine;
 internal partial class PlayerStateDriver : Node
 {
     [Export]
-    public CharacterBody2D player;
+    public PlayerScript player;
 
     private string lastPath;
     private PlayerContext playerContext = new PlayerContext();
@@ -60,6 +60,8 @@ internal partial class PlayerStateDriver : Node
             GD.Print($"State {path}");
             lastPath = path;
         }
+
+        player.lastStatePath = lastPath;
     }
 
     private void ProcessUserControls()

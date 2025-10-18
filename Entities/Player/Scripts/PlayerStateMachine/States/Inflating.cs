@@ -18,17 +18,29 @@ internal class Inflating : State
     {
         if (playerContext.Player.Velocity.Y == playerContext.MaximumSpeedInflating)
         {
-            return ((Idle)Parent).inflated;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).inflated,
+                _ => ((Blocking)Parent).inflated,
+            };
         }
 
         if (playerContext.KeyToFastDeflateJustPressed)
         {
-            return ((Idle)Parent).deflated;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflated,
+                _ => ((Blocking)Parent).deflated,
+            };
         }
 
         if (!playerContext.KeyToInflateIsPressed)
         {
-            return ((Idle)Parent).deflating;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflating,
+                _ => ((Blocking)Parent).deflating,
+            };
         }
 
         return null;

@@ -10,6 +10,7 @@ public class Lost : State
     public Lost(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
         this.playerContext = playerContext;
+        this.Name = "Lost";
     }
 
     protected override void OnEnter()

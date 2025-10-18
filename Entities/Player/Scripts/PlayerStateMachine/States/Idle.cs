@@ -20,9 +20,25 @@ internal class Idle : State
         deflating = new(stateMachine, this, playerContext);
         inflated = new(stateMachine, this, playerContext);
         inflating = new(stateMachine, this, playerContext);
+        this.Name = "Idle";
     }
 
-    protected override State GetInitialState() => deflated;
+    protected override State GetInitialState()
+    {
+        switch (playerContext.Player.Velocity.Y)
+        {
+            case float x when x >= playerContext.MaximumSpeedDeflating:
+                return deflated;
+            case float x when x <= playerContext.MaximumSpeedInflating:
+                return inflated;
+            default:
+                if (playerContext.KeyToInflateIsPressed)
+                {
+                    return inflating;
+                }
+                return deflating;
+        }
+    }
 
     protected override State GetTransition() => playerContext.KeyToBlockJustPressed ? ((PlayerRoot)Parent).Blocking : null;
 

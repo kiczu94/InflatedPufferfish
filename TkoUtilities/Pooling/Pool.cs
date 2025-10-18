@@ -25,13 +25,13 @@ public class Pool<T> where T : Node2D
 
     public void AddToPool(ulong id)
     {
-        var obstacle = visibleObjects.SingleOrDefault(x => x.GetInstanceId() == id);
-        if (obstacle == null)
+        var poolObject = visibleObjects.SingleOrDefault(x => x.GetInstanceId() == id);
+        if (poolObject == null)
         {
             return;
         }
-        obstacle.SetVisible(false);
-        visibleObjects.Remove(obstacle);
-        notVisibleObjects.Add(obstacle);
+        poolObject.SetVisible(false);
+        visibleObjects.Remove(poolObject);
+        notVisibleObjects.Add(poolObject);
     }
 }

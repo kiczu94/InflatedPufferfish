@@ -10,18 +10,27 @@ internal class Inflated : State
     public Inflated(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
         this.playerContext = playerContext;
+        this.Name = "Inflated";
     }
 
     protected override State GetTransition()
     {
         if(playerContext.KeyToFastDeflateJustPressed)
         {
-            return ((Idle)Parent).deflated;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflated,
+                _ => ((Blocking)Parent).deflated,
+            };
         }
 
         if (!playerContext.KeyToInflateIsPressed)
         {
-            return ((Idle)Parent).deflating;
+            return Parent.Name switch
+            {
+                "Idle" => ((Idle)Parent).deflating,
+                _ => ((Blocking)Parent).deflating,
+            };
         }
 
         return null;

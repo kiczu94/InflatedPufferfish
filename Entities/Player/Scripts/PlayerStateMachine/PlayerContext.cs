@@ -14,5 +14,5 @@ public class PlayerContext
     public readonly float MaximumSpeedDeflating = 100f;
     public readonly float MaximumSpeedInflating = -100f;
 
-    public CharacterBody2D Player;
+    public PlayerScript Player;
 }
