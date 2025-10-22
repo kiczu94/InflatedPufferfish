@@ -1,6 +1,6 @@
 using Godot;
 using InflatedPufferfish.Events;
-using InflatedPufferfish.TkoUtilities.Pooling;
+using InflatedPufferfish.TkoUtilities.Utilities;
 using TkoUtilities.EventBus;
 
 public partial class PlanktonSpawner : Node

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace InflatedPufferfish.TkoUtilities.Pooling;
+namespace InflatedPufferfish.TkoUtilities.Utilities;
 
 public class Pool<T> where T : Node2D
 {

@@ -38,11 +38,6 @@ internal partial class PlayerStateDriver : Node
         base._Process(deltaTime);
     }
 
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
-    }
-
     private static string StatePath(State s) => string.Join(" > ", s.PathToRoot().Reverse().Select(x => x.GetType().Name));
 
     private void ResetContextButtonsData()

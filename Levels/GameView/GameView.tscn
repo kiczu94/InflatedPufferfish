@@ -23,8 +23,7 @@ process_mode = 1
 texture = ExtResource("1_mxblw")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_h1phh")]
-process_mode = 1
+[node name="Player" parent="." instance=ExtResource("2_h1phh")]
 z_index = 1
 position = Vector2(40, 80)
 
@@ -45,4 +44,3 @@ process_mode = 1
 script = ExtResource("6_wdihs")
 
 [node name="HUD" parent="." instance=ExtResource("6_m7c7d")]
-process_mode = 3
