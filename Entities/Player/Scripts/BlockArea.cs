@@ -15,6 +15,4 @@ public partial class BlockArea : Area2D
     {
         base._Process(delta);
     }
-
-
 }

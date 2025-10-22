@@ -12,7 +12,7 @@ internal class Blocking : State
     public readonly Deflating deflating;
     public readonly Inflated inflated;
     public readonly Inflating inflating;
- 
+
     private bool animiationFinished = false;
     private readonly PlayerContext playerContext;
 
@@ -26,28 +26,18 @@ internal class Blocking : State
         inflating = new(stateMachine, this, playerContext);
     }
 
-    protected override State GetInitialState() 
+    protected override State GetInitialState() => playerContext.Player.Velocity.Y switch
     {
-        switch (playerContext.Player.Velocity.Y)
-        {
-            case float x when x >= playerContext.MaximumSpeedDeflating:
-                return deflated;
-            case float x when x <= playerContext.MaximumSpeedInflating:
-                return inflated;
-            default:
-                if (playerContext.KeyToInflateIsPressed)
-                {
-                    return inflating;
-                }
-                return deflating;
-        }
-    }
+        float x when x >= playerContext.MaximumSpeedDeflating => deflated,
+        float x when x <= playerContext.MaximumSpeedInflating => inflated,
+        _ => playerContext.KeyToInflateIsPressed ? inflating : deflating,
+    };
 
     protected override State GetTransition() => animiationFinished ? ((PlayerRoot)Parent).Idle : null;
 
     protected override void OnEnter()
     {
-        _ =  Wait.For(4000, () => { animiationFinished = true; });
+        _ = Wait.For(4000, () => { animiationFinished = true; });
     }
 
     protected override void OnExit()
@@ -59,12 +49,10 @@ internal class Blocking : State
     {
         var overlappingAreas = playerContext.Player.blockingArea.GetOverlappingAreas().ToList();
         var enemyArea = overlappingAreas.SingleOrDefault(x => x.GetGroups().Contains("EnemyArea"));
-        if (enemyArea != null )
+        if (enemyArea == null || enemyArea.GlobalPosition.X <= playerContext.Player.GlobalPosition.X)
         {
-            if (enemyArea.GlobalPosition.X> playerContext.Player.GlobalPosition.X)
-            {
-                EventBus<EnemyBlocked>.Raise(new EnemyBlocked(enemyArea.GetParent<Enemy>().GetInstanceId()));
-            }
+            return;
         }
+        EventBus<EnemyBlocked>.Raise(new EnemyBlocked(enemyArea.GetParent<Enemy>().GetInstanceId()));
     }
 }
