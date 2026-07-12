@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d2d8jjs7y1lxi" path="res://Entities/Enemies/Scripts/EnemyStateMachine/EnemyStateDriver.cs" id="5_tk3ys"]
 
 [node name="Enemy" type="Sprite2D"]
-process_mode = 1
+process_mode = 3
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_ttlo4")
 script = ExtResource("2_fln2h")
