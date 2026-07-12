@@ -35,12 +35,6 @@ internal class Blocking : State
         float x when x <= playerContext.MaximumSpeedInflating => inflated,
         _ => playerContext.KeyToInflateIsPressed ? inflating : deflating,
     };
-    protected override State GetInitialState() => playerContext.Player.Velocity.Y switch
-    {
-        float x when x >= playerContext.MaximumSpeedDeflating => deflated,
-        float x when x <= playerContext.MaximumSpeedInflating => inflated,
-        _ => playerContext.KeyToInflateIsPressed ? inflating : deflating,
-    };
 
     protected override State GetTransition() => animiationFinished ? ((PlayerRoot)Parent).Idle : null;
 
