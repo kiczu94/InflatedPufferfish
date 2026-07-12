@@ -4,16 +4,16 @@ using TkoUtilities.EventBus;
 
 public partial class GameOverLabel : Label
 {
-    private EventBinding<PlayerCollidedEvent> fishObstacleCollidedEventBinding;
+    private EventBinding<GameLost> gameLostEventBinding;
 
     public override void _Ready()
     {
-        fishObstacleCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnFishObstacleCollidedEvent);
-        EventBus<PlayerCollidedEvent>.Register(fishObstacleCollidedEventBinding);
+        gameLostEventBinding = new EventBinding<GameLost>(OnGameLost);
+        EventBus<GameLost>.Register(gameLostEventBinding);
         base._Ready();
     }
 
-    private void OnFishObstacleCollidedEvent()
+    private void OnGameLost()
     {
         Visible = true;
     }

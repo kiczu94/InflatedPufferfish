@@ -8,7 +8,7 @@ public partial class ObstacleSpawner : Node
     private bool timeToSpawn = true;
 
     private PackedScene obstacle;
-    
+
     private EventBinding<ObstacleOutOfFieldView> obstacleOutOfFieldViewEventBinding;
     private EventBinding<SpawnObstacleEvent> spawnObstacleEventBinding;
     private Pool<Obstacle> obstaclePool = new();
@@ -31,10 +31,10 @@ public partial class ObstacleSpawner : Node
     private void OnSpawnObstacleEvent(SpawnObstacleEvent @event)
     {
         var upObstacle = obstaclePool.GetFromPool(SpawnNewObstacle);
-        upObstacle.SetPosition(new Vector2(320, @event.upObstaclePosition));
+        upObstacle.SetPosition(new Vector2(400, @event.upObstaclePosition));
         upObstacle.Rotation = Mathf.DegToRad(180);
         var downObstacle = obstaclePool.GetFromPool(SpawnNewObstacle);
-        downObstacle.SetPosition(new Vector2(320, @event.downObstaclePosition));
+        downObstacle.SetPosition(new Vector2(400, @event.downObstaclePosition));
         downObstacle.Rotation = 0;
     }
 

@@ -4,15 +4,15 @@ using TkoUtilities.EventBus;
 
 public partial class GameView : Node
 {
-    private EventBinding<PlayerCollidedEvent> playerCollidedEventBinding;
+    private EventBinding<GameLost> gameLostEventBinding;
     public override void _Ready()
     {
-        playerCollidedEventBinding = new EventBinding<PlayerCollidedEvent>(OnPlayerColididedEvent);
-        EventBus<PlayerCollidedEvent>.Register(playerCollidedEventBinding);
+        gameLostEventBinding = new EventBinding<GameLost>(OnGameLost);
+        EventBus<GameLost>.Register(gameLostEventBinding);
         base._Ready();
     }
 
-    private void OnPlayerColididedEvent()
+    private void OnGameLost()
     {
         GetTree().Paused = true;
     }

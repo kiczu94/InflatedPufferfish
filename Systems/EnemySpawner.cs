@@ -31,7 +31,7 @@ public partial class EnemySpawner : Node
     private void OnSpawnEnemyEvent(SpawnEnemyEvent @event)
     {
         var enemy = enemyPool.GetFromPool(SpawnEnemy);
-        enemy.SetPosition(new Vector2(320, @event.positionY));
+        enemy.SetPosition(new Vector2(400, @event.positionY));
         enemy.SetIsDead();
     }
 

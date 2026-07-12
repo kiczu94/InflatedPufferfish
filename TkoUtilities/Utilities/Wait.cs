@@ -2,9 +2,16 @@ namespace InflatedPufferfish.TkoUtilities.Utilities;
 
 public static class Wait
 {
-    public static async Task For(int miliseconds, Action action)
+    public static async Task For(int milliseconds, Action action, CancellationToken cancellationToken = default)
     {
-        await Task.Delay(miliseconds);
-        action.Invoke();
+        try
+        {
+            await Task.Delay(milliseconds, cancellationToken);
+
+            action.Invoke();
+        }
+        catch (TaskCanceledException)
+        {
+        }
     }
 }

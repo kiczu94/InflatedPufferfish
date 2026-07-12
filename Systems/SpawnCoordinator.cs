@@ -10,8 +10,14 @@ public partial class SpawnCoordinator : Node
     private bool spawnEnemy = false;
     private Random random = new Random();
 
+    private CancellationTokenSource _spawnCts = new CancellationTokenSource();
+
+    private EventBinding<GameLost> gameLostEventBinding;
+
     public override void _Ready()
     {
+        gameLostEventBinding = new EventBinding<GameLost>(OnGameLost);
+        EventBus<GameLost>.Register(gameLostEventBinding);
         _ = Wait.For(6000, () => { spawnEnemy = true; });
         base._Ready();
     }
@@ -32,7 +38,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnPlankton)
         {
-            _ = Wait.For(10000, () => { spawnPlankton = true; });
+            _ = Wait.For(10000, () => { spawnPlankton = true; }, _spawnCts.Token);
             spawnPlankton = false;
             EventBus<SpawnPlanktonEvent>.Raise(new SpawnPlanktonEvent(planktonPosition));
         }
@@ -42,7 +48,7 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnObstacle)
         {
-            _ = Wait.For(2000, () => { spawnObstacle = true; });
+            _ = Wait.For(2000, () => { spawnObstacle = true; }, _spawnCts.Token);
             spawnObstacle = false;
             EventBus<SpawnObstacleEvent>.Raise(new SpawnObstacleEvent(upObstacleYPosition, downObstacleYPosition));
         }
@@ -52,12 +58,13 @@ public partial class SpawnCoordinator : Node
     {
         if (spawnEnemy)
         {
-            _ = Wait.For(6000,
+            _ = Wait.For(8000,
                 () =>
                 {
                     spawnEnemy = true;
                     EventBus<SpawnEnemyEvent>.Raise(new SpawnEnemyEvent(positionY));
-                });
+                },
+                _spawnCts.Token);
             spawnEnemy = false;
         }
     }
@@ -70,5 +77,10 @@ public partial class SpawnCoordinator : Node
         var gapCenter = upObstacleYPosition + distanceBetweenPipes / 2;
 
         return (upObstacleYPosition, downObstacleYPosition, gapCenter);
+    }
+
+    private void OnGameLost()
+    {
+        _spawnCts.Cancel();
     }
 }

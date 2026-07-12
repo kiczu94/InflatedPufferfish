@@ -41,12 +41,13 @@ internal class Blocking : State
     protected override void OnEnter()
     {
         playerContext.Player.animationPlayer.Play("blocking");
-
+        playerContext.IsBlocking = true;
         animiationFinished = false;
     }
 
     protected override void OnExit()
     {
+        playerContext.IsBlocking = false;
         animiationFinished = false;
     }
 

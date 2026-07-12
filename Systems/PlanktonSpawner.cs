@@ -27,7 +27,7 @@ public partial class PlanktonSpawner : Node
     private void OnSpawnPlanktonEvent(SpawnPlanktonEvent @event)
     {
         var plankton = planktonPool.GetFromPool(Instantiate);
-        plankton.SetPosition(new Vector2(320,@event.positionY));
+        plankton.SetPosition(new Vector2(400, @event.positionY));
     }
 
     private void OnPlanktonOutOfFieldView(PlanktonOutOfFieldView @event)

@@ -80,6 +80,10 @@ internal partial class PlayerStateDriver : Node
     private void OnFishObstacleCollidedEvent(PlayerCollidedEvent @event)
     {
         GD.Print($"Collided with {@event.Reason}");
-        playerContext.PlayerLost = true;
+        if (!playerContext.IsBlocking)
+        {
+            EventBus<GameLost>.Raise(new GameLost());
+            playerContext.PlayerLost = true;   
+        }
     }
 }
