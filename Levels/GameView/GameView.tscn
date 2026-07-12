@@ -1,46 +1,55 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgcjlwrybi4km"]
+[gd_scene format=3 uid="uid://cgcjlwrybi4km"]
 
-[ext_resource type="Texture2D" uid="uid://bebtg0arujujm" path="res://Levels/GameView/background.png" id="1_mxblw"]
 [ext_resource type="Script" uid="uid://gl67gxav1tja" path="res://Levels/GameView/Scripts/GameView.cs" id="1_wdihs"]
 [ext_resource type="PackedScene" uid="uid://cojxqsvcymxxm" path="res://Entities/Player/Player.tscn" id="2_h1phh"]
+[ext_resource type="Texture2D" uid="uid://b6w8505h61m5l" path="res://Levels/GameView/1.png" id="2_wdihs"]
 [ext_resource type="Script" uid="uid://cjgfdbmpg4scx" path="res://Systems/ObstacleSpawner.cs" id="3_0j55i"]
+[ext_resource type="Texture2D" uid="uid://db7u6rymbmkuk" path="res://Levels/GameView/5.png" id="3_r68w4"]
 [ext_resource type="Script" uid="uid://d3j25cyu3ajas" path="res://Systems/SpawnCoordinator.cs" id="4_ndw1j"]
 [ext_resource type="Script" uid="uid://buki0kuix7amh" path="res://Systems/PlanktonSpawner.cs" id="6_ag8a2"]
 [ext_resource type="PackedScene" uid="uid://d5okqjrfe8rb" path="res://Levels/GameView/Hud.tscn" id="6_m7c7d"]
 [ext_resource type="Script" uid="uid://b336erohof6yt" path="res://Systems/EnemySpawner.cs" id="6_wdihs"]
 
-[node name="GameView" type="Node"]
+[node name="GameView" type="Node" unique_id=1064178649]
 process_mode = 3
 script = ExtResource("1_wdihs")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1700615570]
 process_mode = 1
-position = Vector2(160, 90)
+anchor_mode = 0
 metadata/_edit_lock_ = true
 
-[node name="Backgorund" type="Sprite2D" parent="."]
-process_mode = 1
-texture = ExtResource("1_mxblw")
-metadata/_edit_lock_ = true
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1622070373]
+scale = Vector2(0.2, 0.2)
+autoscroll = Vector2(10, 0)
+repeat_times = 10
 
-[node name="Player" parent="." instance=ExtResource("2_h1phh")]
+[node name="Water" type="Sprite2D" parent="Parallax2D" unique_id=223749275]
+position = Vector2(959.9999, 529.99994)
+texture = ExtResource("2_wdihs")
+
+[node name="Ground" type="Sprite2D" parent="Parallax2D" unique_id=126390987]
+position = Vector2(960, 420)
+texture = ExtResource("3_r68w4")
+
+[node name="Player" parent="." unique_id=871414058 instance=ExtResource("2_h1phh")]
 z_index = 1
 position = Vector2(40, 80)
 
-[node name="SpawnCoordinator" type="Node" parent="."]
+[node name="SpawnCoordinator" type="Node" parent="." unique_id=976164371]
 process_mode = 1
 script = ExtResource("4_ndw1j")
 
-[node name="ObstacleSpawner" type="Node" parent="."]
+[node name="ObstacleSpawner" type="Node" parent="." unique_id=75956973]
 process_mode = 1
 script = ExtResource("3_0j55i")
 
-[node name="PlanktonSpawner" type="Node" parent="."]
+[node name="PlanktonSpawner" type="Node" parent="." unique_id=22449888]
 process_mode = 1
 script = ExtResource("6_ag8a2")
 
-[node name="EnemySpawner" type="Node" parent="."]
+[node name="EnemySpawner" type="Node" parent="." unique_id=301370057]
 process_mode = 1
 script = ExtResource("6_wdihs")
 
-[node name="HUD" parent="." instance=ExtResource("6_m7c7d")]
+[node name="HUD" parent="." unique_id=1254770868 instance=ExtResource("6_m7c7d")]

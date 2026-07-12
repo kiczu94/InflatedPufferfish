@@ -1,22 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0bc7v4fcqpg0"]
+[gd_scene load_steps=4 format=3 uid="uid://b0bc7v4fcqpg0"]
 
-[ext_resource type="Texture2D" uid="uid://csages8kniern" path="res://Entities/Obstacle/Sprites/Player.png" id="1_vx6xr"]
+[ext_resource type="Texture2D" uid="uid://bpq136h4a0dc3" path="res://Entities/Obstacle/Sprites/Untitled.png" id="1_ov7ky"]
 [ext_resource type="Script" uid="uid://bkr18qkmtersk" path="res://Entities/Obstacle/Scripts/Obstacle.cs" id="2_7ex77"]
 [ext_resource type="Script" uid="uid://3wr5r41frxf1" path="res://Entities/Obstacle/Scripts/ObstacleArea2d.cs" id="3_ov7ky"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ex77"]
-size = Vector2(20, 248)
-
 [node name="Obstacle" type="Sprite2D"]
 process_mode = 1
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_vx6xr")
+scale = Vector2(0.063541666, 0.11851852)
+texture = ExtResource("1_ov7ky")
 script = ExtResource("2_7ex77")
 
 [node name="ObstacleArea2D" type="Area2D" parent="."]
 script = ExtResource("3_ov7ky")
 
-[node name="ObstacleCollisionShape" type="CollisionShape2D" parent="ObstacleArea2D"]
-shape = SubResource("RectangleShape2D_7ex77")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ObstacleArea2D"]
+position = Vector2(15.737707, -16.875)
+scale = Vector2(0.49999967, 0.84375036)
+polygon = PackedVector2Array(-157.37717, -309.99988, -346.22977, -449.99982, -629.50867, -489.99982, -692.4596, -399.99985, -692.4596, -89.99996, -472.1315, 59.999977, -377.7052, 309.99988, 220.32803, 279.9999, 535.08234, 99.99996, 535.08234, -59.999977, 472.1315, -139.99994, 598.0332, -369.99985, 346.22977, -289.99988, 314.75433, -369.99985, 409.18063, -519.9998, 62.950863, -289.99988, -31.475437, -399.99985, -3.8146973e-06, -599.99976, -157.37717, -509.99982)
 
 [connection signal="body_entered" from="ObstacleArea2D" to="." method="OnBodyEntered"]

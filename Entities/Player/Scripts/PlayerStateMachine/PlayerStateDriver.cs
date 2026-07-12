@@ -77,8 +77,9 @@ internal partial class PlayerStateDriver : Node
         }
     }
 
-    private void OnFishObstacleCollidedEvent()
+    private void OnFishObstacleCollidedEvent(PlayerCollidedEvent @event)
     {
+        GD.Print($"Collided with {@event.Reason}");
         playerContext.PlayerLost = true;
     }
 }

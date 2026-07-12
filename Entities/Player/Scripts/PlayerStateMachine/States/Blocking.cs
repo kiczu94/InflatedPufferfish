@@ -1,6 +1,5 @@
 using inflatedpufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
 using InflatedPufferfish.Events;
-using InflatedPufferfish.TkoUtilities.Utilities;
 using TkoUtilities.EventBus;
 using TkoUtilities.Hsm;
 
@@ -16,8 +15,12 @@ internal class Blocking : State
     private bool animiationFinished = false;
     private readonly PlayerContext playerContext;
 
+    private EventBinding<AnimationFinished> animationFinishedEventBinding;
+
     public Blocking(StateMachine stateMachine, State parent, PlayerContext playerContext) : base(stateMachine, parent)
     {
+        animationFinishedEventBinding = new EventBinding<AnimationFinished>(OnAnimationFinished);
+        EventBus<AnimationFinished>.Register(animationFinishedEventBinding);
         this.playerContext = playerContext;
         this.Name = "Blocking";
         deflated = new(stateMachine, this, playerContext);
@@ -37,7 +40,9 @@ internal class Blocking : State
 
     protected override void OnEnter()
     {
-        _ = Wait.For(4000, () => { animiationFinished = true; });
+        playerContext.Player.animationPlayer.Play("blocking");
+
+        animiationFinished = false;
     }
 
     protected override void OnExit()
@@ -54,5 +59,10 @@ internal class Blocking : State
             return;
         }
         EventBus<EnemyBlocked>.Raise(new EnemyBlocked(enemyArea.GetParent<Enemy>().GetInstanceId()));
+    }
+
+    private void OnAnimationFinished()
+    {
+        animiationFinished = true;
     }
 }

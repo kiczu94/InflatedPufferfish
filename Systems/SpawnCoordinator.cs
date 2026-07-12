@@ -64,7 +64,7 @@ public partial class SpawnCoordinator : Node
 
     private (int upObstacleY, int downObstacleY, int gapCenter) GetCoordinates()
     {
-        var distanceBetweenPipes = random.Next(150, 181);
+        var distanceBetweenPipes = random.Next(160, 200);
         var upObstacleYPosition = random.Next(-30, 21);
         var downObstacleYPosition = upObstacleYPosition + distanceBetweenPipes;
         var gapCenter = upObstacleYPosition + distanceBetweenPipes / 2;

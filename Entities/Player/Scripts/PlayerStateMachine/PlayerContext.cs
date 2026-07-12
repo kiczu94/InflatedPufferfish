@@ -7,8 +7,8 @@ public class PlayerContext
     public bool KeyToBlockJustPressed;
     public bool IsAttacking;
     public bool PlayerLost;
-    public readonly float MaximumSpeedDeflating = 100f;
-    public readonly float MaximumSpeedInflating = -100f;
+    public readonly float MaximumSpeedDeflating = 90f;
+    public readonly float MaximumSpeedInflating = -90f;
 
     public PlayerScript Player;
 }

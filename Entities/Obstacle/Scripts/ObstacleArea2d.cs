@@ -14,7 +14,7 @@ public partial class ObstacleArea2d : Area2D
     {
         if (body.GetGroups().Contains("Player"))
         {
-            EventBus<PlayerCollidedEvent>.Raise(new PlayerCollidedEvent());
+            EventBus<PlayerCollidedEvent>.Raise(@event: new PlayerCollidedEvent("Obstacle"));
         }
     }
 }

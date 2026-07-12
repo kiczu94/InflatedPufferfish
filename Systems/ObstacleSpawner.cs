@@ -32,8 +32,10 @@ public partial class ObstacleSpawner : Node
     {
         var upObstacle = obstaclePool.GetFromPool(SpawnNewObstacle);
         upObstacle.SetPosition(new Vector2(320, @event.upObstaclePosition));
+        upObstacle.Rotation = Mathf.DegToRad(180);
         var downObstacle = obstaclePool.GetFromPool(SpawnNewObstacle);
         downObstacle.SetPosition(new Vector2(320, @event.downObstaclePosition));
+        downObstacle.Rotation = 0;
     }
 
     private Obstacle SpawnNewObstacle()

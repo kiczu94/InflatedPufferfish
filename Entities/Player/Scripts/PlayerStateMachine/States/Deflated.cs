@@ -24,6 +24,8 @@ internal class Deflated : State
     protected override void OnEnter()
     {
         playerContext.Player.Velocity = new Vector2(0, playerContext.MaximumSpeedDeflating);
+        playerContext.Player.animatedSprite.Frame = 7;
+        playerContext.Player.playerCollisionShape.Scale = new Vector2(1.0f, 0.3f);
         GD.Print("OnEnter Deflated");
     }
 }

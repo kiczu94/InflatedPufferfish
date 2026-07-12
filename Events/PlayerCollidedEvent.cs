@@ -2,4 +2,4 @@ using TkoUtilities.EventBus;
 
 namespace InflatedPufferfish.Events;
 
-internal record PlayerCollidedEvent() : IEvent;
+internal record PlayerCollidedEvent(string Reason) : IEvent;

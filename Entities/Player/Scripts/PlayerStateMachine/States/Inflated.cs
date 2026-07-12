@@ -38,6 +38,8 @@ internal class Inflated : State
 
     protected override void OnEnter()
     {
+        playerContext.Player.animatedSprite.Frame = 0;
+        playerContext.Player.playerCollisionShape.Scale = Vector2.One;
         GD.Print("OnEnter Inflated");
     }
 }

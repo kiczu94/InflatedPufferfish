@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bebtg0arujujm"
-path="res://.godot/imported/background.png-e994e0089a7f2ac17b9895cfd52bbc13.ctex"
+uid="uid://bc4wo28oi0vse"
+path="res://.godot/imported/spritesheet.png-8b5eaec7fd5e29010ba1c5750857b1f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/GameView/background.png"
-dest_files=["res://.godot/imported/background.png-e994e0089a7f2ac17b9895cfd52bbc13.ctex"]
+source_file="res://Entities/Player/Sprites/spritesheet.png"
+dest_files=["res://.godot/imported/spritesheet.png-8b5eaec7fd5e29010ba1c5750857b1f6.ctex"]
 
 [params]
 

@@ -1,3 +1,4 @@
+using Godot;
 using TkoUtilities.Hsm;
 
 namespace InflatedPufferfish.Entities.Player.Scripts.PlayerStateMachine.States;
@@ -19,6 +20,11 @@ internal partial class PlayerRoot : State
         this.Name = "PlayerRoot";
     }
 
+    protected override void OnEnter()
+    {
+        GD.Print("Entered root");
+    }
+
     protected override State GetInitialState() => Idle;
 
     protected override State GetTransition()
@@ -30,7 +36,7 @@ internal partial class PlayerRoot : State
 
         if (playerContext.KeyToBlockJustPressed)
         {
-            return Blocking; 
+            return Blocking;
         }
 
         return null;

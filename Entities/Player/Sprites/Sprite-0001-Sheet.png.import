@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bebtg0arujujm"
-path="res://.godot/imported/background.png-e994e0089a7f2ac17b9895cfd52bbc13.ctex"
+uid="uid://dlq3qj0f5pt2o"
+path="res://.godot/imported/Sprite-0001-Sheet.png-120a97a0b80fd823ea49e93d95727e86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/GameView/background.png"
-dest_files=["res://.godot/imported/background.png-e994e0089a7f2ac17b9895cfd52bbc13.ctex"]
+source_file="res://Entities/Player/Sprites/Sprite-0001-Sheet.png"
+dest_files=["res://.godot/imported/Sprite-0001-Sheet.png-120a97a0b80fd823ea49e93d95727e86.ctex"]
 
 [params]
 
