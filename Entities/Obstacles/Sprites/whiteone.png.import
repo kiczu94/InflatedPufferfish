@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csages8kniern"
-path="res://.godot/imported/Player.png-b489ca1be8858f90260cdea5cb6f3948.ctex"
+uid="uid://bfb66of0lj73w"
+path="res://.godot/imported/whiteone.png-6a48e92c4018ca4630cd481e9f5bca86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Obstacle/Sprites/Player.png"
-dest_files=["res://.godot/imported/Player.png-b489ca1be8858f90260cdea5cb6f3948.ctex"]
+source_file="res://Entities/Obstacles/Sprites/whiteone.png"
+dest_files=["res://.godot/imported/whiteone.png-6a48e92c4018ca4630cd481e9f5bca86.ctex"]
 
 [params]
 

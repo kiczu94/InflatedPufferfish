@@ -11,11 +11,14 @@ public partial class ObstacleSpawner : Node
 
     private EventBinding<ObstacleOutOfFieldView> obstacleOutOfFieldViewEventBinding;
     private EventBinding<SpawnObstacleEvent> spawnObstacleEventBinding;
+
+    private ObstacleResource redResource;
     private Pool<Obstacle> obstaclePool = new();
 
     public override void _Ready()
     {
-        obstacle = ResourceLoader.Load("res://Entities/Obstacle/Obstacle.tscn") as PackedScene;
+        obstacle = ResourceLoader.Load("res://Entities/Obstacles/Obstacle.tscn") as PackedScene;
+        redResource= ResourceLoader.Load("res://Entities/Obstacles/RedObstacleResource.tres") as ObstacleResource;
         obstacleOutOfFieldViewEventBinding = new EventBinding<ObstacleOutOfFieldView>(OnObstacleOutOfFieldViewEvent);
         spawnObstacleEventBinding = new EventBinding<SpawnObstacleEvent>(OnSpawnObstacleEvent);
         EventBus<SpawnObstacleEvent>.Register(spawnObstacleEventBinding);
@@ -41,6 +44,7 @@ public partial class ObstacleSpawner : Node
     private Obstacle SpawnNewObstacle()
     {
         var obstacle = this.obstacle.Instantiate() as Obstacle;
+        obstacle.SetObstacleResource(redResource);
         AddChild(obstacle);
         return obstacle;
     }

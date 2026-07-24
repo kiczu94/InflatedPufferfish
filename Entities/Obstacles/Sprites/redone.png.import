@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpq136h4a0dc3"
-path="res://.godot/imported/Untitled.png-3602f8ca6b94bfad8f7486fed6e91ac8.ctex"
+uid="uid://q15s4simvnr1"
+path="res://.godot/imported/redone.png-b72f0421796cc954cc05b2e8d4873a41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Obstacle/Sprites/Untitled.png"
-dest_files=["res://.godot/imported/Untitled.png-3602f8ca6b94bfad8f7486fed6e91ac8.ctex"]
+source_file="res://Entities/Obstacles/Sprites/redone.png"
+dest_files=["res://.godot/imported/redone.png-b72f0421796cc954cc05b2e8d4873a41.ctex"]
 
 [params]
 

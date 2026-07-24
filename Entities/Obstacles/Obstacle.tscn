@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b0bc7v4fcqpg0"]
+
+[ext_resource type="Texture2D" uid="uid://q15s4simvnr1" path="res://Entities/Obstacles/Sprites/redone.png" id="1_88ft3"]
+[ext_resource type="Script" uid="uid://bkr18qkmtersk" path="res://Entities/Obstacles/Scripts/Obstacle.cs" id="2_7ex77"]
+[ext_resource type="Script" uid="uid://3wr5r41frxf1" path="res://Entities/Obstacles/Scripts/ObstacleArea2d.cs" id="3_ov7ky"]
+
+[node name="Obstacle" type="Node2D" unique_id=1703171577]
+script = ExtResource("2_7ex77")
+
+[node name="ObstacleSprite" type="Sprite2D" parent="." unique_id=612455590]
+texture = ExtResource("1_88ft3")
+
+[node name="ObstacleArea2D" type="Area2D" parent="ObstacleSprite" unique_id=1411446723]
+script = ExtResource("3_ov7ky")
+
+[node name="ObstacleCollisionPolygon2D" type="CollisionPolygon2D" parent="ObstacleSprite/ObstacleArea2D" unique_id=1778046477]
+polygon = PackedVector2Array(10, 14, 13, -11, -12, -20)
+
+[connection signal="body_entered" from="ObstacleSprite/ObstacleArea2D" to="ObstacleSprite/ObstacleArea2D" method="OnBodyEntered"]
