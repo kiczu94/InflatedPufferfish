@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gl67gxav1tja" path="res://Levels/GameView/Scripts/GameView.cs" id="1_wdihs"]
 [ext_resource type="PackedScene" uid="uid://cojxqsvcymxxm" path="res://Entities/Player/Player.tscn" id="2_h1phh"]
+[ext_resource type="Texture2D" uid="uid://cfwegy678p0pv" path="res://Levels/GameView/background.png" id="2_wdihs"]
 [ext_resource type="Script" uid="uid://cjgfdbmpg4scx" path="res://Systems/ObstacleSpawner.cs" id="3_0j55i"]
 [ext_resource type="Script" uid="uid://d3j25cyu3ajas" path="res://Systems/SpawnCoordinator.cs" id="4_ndw1j"]
 [ext_resource type="Script" uid="uid://buki0kuix7amh" path="res://Systems/PlanktonSpawner.cs" id="6_ag8a2"]
@@ -17,10 +18,9 @@ process_mode = 1
 anchor_mode = 0
 metadata/_edit_lock_ = true
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1622070373]
-scale = Vector2(0.2, 0.2)
-autoscroll = Vector2(10, 0)
-repeat_times = 10
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1162476056]
+texture = ExtResource("2_wdihs")
+centered = false
 
 [node name="Player" parent="." unique_id=871414058 instance=ExtResource("2_h1phh")]
 z_index = 1
