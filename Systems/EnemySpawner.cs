@@ -8,7 +8,7 @@ public partial class EnemySpawner : Node
     private bool timeToSpawn = true;
 
     private PackedScene enemy;
-    
+
     private EventBinding<EnemyOutOfFieldView> enemyOutOfFieldViewEventBinding;
     private EventBinding<SpawnEnemyEvent> spawnEnemyEventBinding;
     private Pool<Enemy> enemyPool = new();
@@ -33,6 +33,7 @@ public partial class EnemySpawner : Node
         var enemy = enemyPool.GetFromPool(SpawnEnemy);
         enemy.SetPosition(new Vector2(400, @event.positionY));
         enemy.SetIsDead();
+        enemy.SetIsEating();
     }
 
     private Enemy SpawnEnemy()

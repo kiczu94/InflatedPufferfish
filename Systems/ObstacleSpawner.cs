@@ -2,6 +2,7 @@ using Godot;
 using InflatedPufferfish.Events;
 using InflatedPufferfish.TkoUtilities.Utilities;
 using TkoUtilities.EventBus;
+using TkoUtilities.Utilities;
 
 public partial class ObstacleSpawner : Node
 {
@@ -12,13 +13,17 @@ public partial class ObstacleSpawner : Node
     private EventBinding<ObstacleOutOfFieldView> obstacleOutOfFieldViewEventBinding;
     private EventBinding<SpawnObstacleEvent> spawnObstacleEventBinding;
 
-    private ObstacleResource redResource;
+    private ObstacleResource redObstacleResource;
+    private ObstacleResource yellowObstacleResource;
+    private ObstacleResource whiteObstacleResource;
     private Pool<Obstacle> obstaclePool = new();
 
     public override void _Ready()
     {
         obstacle = ResourceLoader.Load("res://Entities/Obstacles/Obstacle.tscn") as PackedScene;
-        redResource= ResourceLoader.Load("res://Entities/Obstacles/RedObstacleResource.tres") as ObstacleResource;
+        redObstacleResource = ResourceLoader.Load("res://Entities/Obstacles/Resources/RedObstacleResource.tres") as ObstacleResource;
+        yellowObstacleResource = ResourceLoader.Load("res://Entities/Obstacles/Resources/YellowObstacleResource.tres") as ObstacleResource;
+        whiteObstacleResource = ResourceLoader.Load("res://Entities/Obstacles/Resources/WhiteObstacleResource.tres") as ObstacleResource;
         obstacleOutOfFieldViewEventBinding = new EventBinding<ObstacleOutOfFieldView>(OnObstacleOutOfFieldViewEvent);
         spawnObstacleEventBinding = new EventBinding<SpawnObstacleEvent>(OnSpawnObstacleEvent);
         EventBus<SpawnObstacleEvent>.Register(spawnObstacleEventBinding);
@@ -44,7 +49,8 @@ public partial class ObstacleSpawner : Node
     private Obstacle SpawnNewObstacle()
     {
         var obstacle = this.obstacle.Instantiate() as Obstacle;
-        obstacle.SetObstacleResource(redResource);
+        var resource = RandomGenerator<ObstacleResource>.PickRandom([redObstacleResource, yellowObstacleResource, whiteObstacleResource]);
+        obstacle.SetObstacleResource(resource);
         AddChild(obstacle);
         return obstacle;
     }

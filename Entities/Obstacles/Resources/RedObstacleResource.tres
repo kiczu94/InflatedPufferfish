@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ObstacleResource" format=3 uid="uid://tdjkg532kcbr"]
 
 [ext_resource type="Texture2D" uid="uid://q15s4simvnr1" path="res://Entities/Obstacles/Sprites/redone.png" id="1_e8wpn"]
-[ext_resource type="Script" uid="uid://dh6q0yo4va1tu" path="res://Entities/Obstacles/ObstacleResource.cs" id="2_mctkm"]
+[ext_resource type="Script" uid="uid://dh6q0yo4va1tu" path="res://Entities/Obstacles/Resources/ObstacleResource.cs" id="2_mctkm"]
 
 [resource]
 script = ExtResource("2_mctkm")

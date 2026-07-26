@@ -8,7 +8,7 @@ public partial class EnemyArea2d : Area2D
 
     public override void _Ready()
     {
-        enemyId = GetParent<Enemy>().GetInstanceId();
+        enemyId = GetNode<Node2D>("../../../Enemy").GetInstanceId();
         BodyEntered += OnBodyEntered;
         base._Ready();
     }

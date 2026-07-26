@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstacleResource" format=3 uid="uid://bkx6vra74teid"]
+
+[ext_resource type="Texture2D" uid="uid://bfb66of0lj73w" path="res://Entities/Obstacles/Sprites/whiteone.png" id="1_um653"]
+[ext_resource type="Script" uid="uid://dh6q0yo4va1tu" path="res://Entities/Obstacles/Resources/ObstacleResource.cs" id="2_3luoc"]
+
+[resource]
+script = ExtResource("2_3luoc")
+Points = PackedVector2Array(2, 13, 3, -1, -5, -17, -5, -28, -2, -32, -2, -37, 1, -39, 5, -32, 6, -27, 14, -7, 15, 4, 16, 9, 14, 33, 4, 51, -18, 50, -5, 35, 0, 23)
+Texture = ExtResource("1_um653")
+metadata/_custom_type_script = "uid://dh6q0yo4va1tu"

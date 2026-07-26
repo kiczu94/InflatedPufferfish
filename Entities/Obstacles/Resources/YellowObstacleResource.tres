@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstacleResource" format=3 uid="uid://dlk62lx42es2p"]
+
+[ext_resource type="Texture2D" uid="uid://e7c0kj3i8k6m" path="res://Entities/Obstacles/Sprites/treelike.png" id="1_qd64d"]
+[ext_resource type="Script" uid="uid://dh6q0yo4va1tu" path="res://Entities/Obstacles/Resources/ObstacleResource.cs" id="2_dlcnu"]
+
+[resource]
+script = ExtResource("2_dlcnu")
+Points = PackedVector2Array(-9, 0, -14, -15, -21, -26, -31, -33, -31, -36, -26, -42, -15, -46, 17, -46, 28, -43, 31, -37, 31, -32, 21, -24, 19, -18, 13, -13, 11, 3, 10, 50, -8, 50)
+Texture = ExtResource("1_qd64d")
+metadata/_custom_type_script = "uid://dh6q0yo4va1tu"

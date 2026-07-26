@@ -20,10 +20,17 @@ internal class Alive : State
     protected override void OnUpdate(double deltaTime)
     {
         enemyContext.enemy.Position += enemyContext.enemySpeed * (float)deltaTime;
+        var animationFrame = enemyContext.enemy.animatedSprite2D.Frame;
+        if (enemyContext.changeToEatingAnimation)
+        {
+            enemyContext.enemy.animatedSprite2D.Animation = "Eating";
+            enemyContext.enemy.animatedSprite2D.Frame = animationFrame;
+        }
     }
 
     protected override void OnEnter()
     {
-        GD.Print("Entered Alive");
+        enemyContext.enemy.animatedSprite2D.Animation = "Swimming";
+        enemyContext.enemy.animatedSprite2D.Play();
     }
 }

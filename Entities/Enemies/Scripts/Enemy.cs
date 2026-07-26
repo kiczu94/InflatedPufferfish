@@ -3,13 +3,15 @@ using InflatedPufferfish.Entities.Enemies.Scripts.EnemyStateMachine;
 using InflatedPufferfish.Events;
 using TkoUtilities.EventBus;
 
-public partial class Enemy : Sprite2D
+public partial class Enemy : Node2D
 {
+    public AnimatedSprite2D animatedSprite2D;
     EnemyStateDriver enemyStateDriver;
 
     public override void _Ready()
     {
         enemyStateDriver = GetNode<EnemyStateDriver>("EnemyStateDriver");
+        animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         base._Ready();
     }
 
@@ -22,6 +24,11 @@ public partial class Enemy : Sprite2D
     public void SetIsDead(bool isDead = false)
     {
         enemyStateDriver.SetIsDead(isDead);
+    }
+
+    public void SetIsEating(bool isEating = false)
+    {
+        enemyStateDriver.SetIsEating(isEating);
     }
 
     private void NotifyIfOutOfView()

@@ -59,7 +59,7 @@ internal class Blocking : State
         {
             return;
         }
-        EventBus<EnemyBlocked>.Raise(new EnemyBlocked(enemyArea.GetParent<Enemy>().GetInstanceId()));
+        EventBus<EnemyBlocked>.Raise(new EnemyBlocked(enemyArea.GetParent().GetParent<Enemy>().GetInstanceId()));
     }
 
     private void OnAnimationFinished()

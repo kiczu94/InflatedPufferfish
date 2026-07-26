@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k8dcvtionpc0"
-path="res://.godot/imported/Sprite-0002.png-6bc682d5fb3ba5f1a467f4962581aac5.ctex"
+uid="uid://bxws6wkkw3ah8"
+path="res://.godot/imported/Barakuda.png-ca05bbd2cc19f587a5fc594a3be30f5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Enemies/Sprites/Sprite-0002.png"
-dest_files=["res://.godot/imported/Sprite-0002.png-6bc682d5fb3ba5f1a467f4962581aac5.ctex"]
+source_file="res://Entities/Enemies/Sprites/Barakuda.png"
+dest_files=["res://.godot/imported/Barakuda.png-ca05bbd2cc19f587a5fc594a3be30f5f.ctex"]
 
 [params]
 
