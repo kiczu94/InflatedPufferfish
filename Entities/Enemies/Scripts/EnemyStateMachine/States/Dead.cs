@@ -14,11 +14,11 @@ internal class Dead : State
 
     protected override State GetInitialState() => null;
 
-    protected override State GetTransition() => enemyContext.isDead ? null : ((EnemyRoot)Parent).alive;
+    protected override State GetTransition() => enemyContext.isDead ? null : ((EnemyRoot)Parent).Swimming;
 
     protected override void OnUpdate(double deltaTime)
     {
-        enemyContext.enemy.Position += new Vector2(30,30) * (float)deltaTime;
+        enemyContext.enemy.Position += new Vector2(30, 30) * (float)deltaTime;
     }
 
     protected override void OnEnter()

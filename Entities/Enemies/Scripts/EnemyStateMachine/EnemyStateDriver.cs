@@ -38,10 +38,11 @@ public partial class EnemyStateDriver : Node
     {
         enemyContext.isDead = isDead;
         enemyContext.enemy = enemy;
-        enemyContext.changeToEatingAnimation = isEating;
+        enemyContext.isEating = isEating;
         stateMachine.Tick(delta);
         base._Process(delta);
     }
+
     public void SetIsDead(bool isDead)
     {
         this.isDead = isDead;
@@ -67,7 +68,7 @@ public partial class EnemyStateDriver : Node
 
     private void OnPlayerEnteredEatingArea(PlayerEnteredEatingArea @event)
     {
-        if(@event.InstanceId == enemy.GetInstanceId())
+        if (@event.InstanceId == enemy.GetInstanceId())
         {
             isEating = true;
         }

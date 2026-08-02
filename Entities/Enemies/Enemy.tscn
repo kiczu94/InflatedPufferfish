@@ -169,6 +169,7 @@ position = Vector2(-0.8333333, -0.8333335)
 shape = SubResource("RectangleShape2D_sylug")
 
 [node name="EnemyArea2D" type="Area2D" parent="AnimatedSprite2D" unique_id=623479217]
+unique_name_in_owner = true
 scale = Vector2(0.6, 0.6)
 script = ExtResource("3_yxp7e")
 
@@ -176,6 +177,7 @@ script = ExtResource("3_yxp7e")
 polygon = PackedVector2Array(-5, 10, -10, 5, -21.666666, 5, -26.666666, 0, -18.333332, -3.3333333, -11.666666, -5, 8.333333, -6.6666665, 13.333333, -10, 16.666666, -5, 25, -13.333333, 26.666666, -6.6666665, 21.666666, 0, 26.666666, 5, 25, 11.666666, 18.333332, 5, 13.333333, 10, 8.333333, 5, -3.3333333, 5)
 
 [node name="EatingArea" type="Area2D" parent="AnimatedSprite2D" unique_id=1695251756]
+unique_name_in_owner = true
 script = ExtResource("5_m5p8k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/EatingArea" unique_id=2103104751]

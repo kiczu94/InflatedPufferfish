@@ -6,6 +6,7 @@ using TkoUtilities.EventBus;
 public partial class Enemy : Node2D
 {
     public AnimatedSprite2D animatedSprite2D;
+
     EnemyStateDriver enemyStateDriver;
 
     public override void _Ready()
@@ -21,14 +22,10 @@ public partial class Enemy : Node2D
         base._Process(delta);
     }
 
-    public void SetIsDead(bool isDead = false)
+    public void ResetState()
     {
-        enemyStateDriver.SetIsDead(isDead);
-    }
-
-    public void SetIsEating(bool isEating = false)
-    {
-        enemyStateDriver.SetIsEating(isEating);
+        enemyStateDriver.SetIsDead(false);
+        enemyStateDriver.SetIsEating(false);
     }
 
     private void NotifyIfOutOfView()
@@ -41,6 +38,11 @@ public partial class Enemy : Node2D
         if (Position.Y > 200)
         {
             EventBus<EnemyOutOfFieldView>.Raise(new EnemyOutOfFieldView(this.GetInstanceId()));
+        }
+
+        if (Position.X < -30 || Position.Y > 200)
+        {
+            enemyStateDriver.SetIsDead(true);
         }
     }
 
