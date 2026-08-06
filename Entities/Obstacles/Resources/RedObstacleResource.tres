@@ -3,8 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://q15s4simvnr1" path="res://Entities/Obstacles/Sprites/redone.png" id="1_e8wpn"]
 [ext_resource type="Script" uid="uid://dh6q0yo4va1tu" path="res://Entities/Obstacles/Resources/ObstacleResource.cs" id="2_mctkm"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_r5s3m"]
+
 [resource]
 script = ExtResource("2_mctkm")
 Points = PackedVector2Array(15, -45, 11, -49, -3, -44, -10, -34, -12, -22, -15, -13, -16, 4, -25, 18, -15.738, 50.625, 14, 51, 27, 31, 28, -30, 26, -41)
 Texture = ExtResource("1_e8wpn")
+SpriteFrames = SubResource("SpriteFrames_r5s3m")
 metadata/_custom_type_script = "uid://dh6q0yo4va1tu"
